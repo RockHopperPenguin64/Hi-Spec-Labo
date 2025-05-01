@@ -1,0 +1,96 @@
+/* ---- About セクション ---- */
+.about-section {
+  background-color: #fefcf7;
+  font-family: "Klee One", serif;
+  padding: 2em;
+  line-height: 1.8;
+  color: #333333;
+}
+
+/* セクションの大見出し */
+.section-heading {
+  font-size: 1.8em;
+  color: #7a252a;
+  margin-bottom: 1.5em;
+  font-weight: bold;
+}
+
+/* 中見出し */
+.subheading {
+  font-size: 1.4em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #8c1010;
+  border-left: 5px solid #b33d3d;
+  padding-left: 0.5em;
+}
+
+/* 通常の段落 */
+.paragraph {
+  margin-bottom: 1em;
+  font-size: 1em;
+  padding: 0 0.2em;
+}
+
+/* 各ブロック */
+.intro-block,
+.content-block,
+.profile-block,
+.tech-block,
+.message-block,
+.links-block {
+  margin-bottom: 2em;
+  background-color: #fff;
+  padding: 1.2em;
+  border-radius: 0.8em;
+  border: 1px solid #e4dfd4;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* リスト共通 */
+.content-list,
+.profile-list,
+.tech-list,
+.link-list {
+  list-style-type: disc;
+  padding-left: 1.2em;
+  margin-bottom: 1em;
+}
+
+.link-list a {
+  color: #33335d;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.link-list a:hover {
+  color: #7a252a;
+}
+
+/* メディアクエリ（スマホ対応） */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 1em;
+  }
+
+  .section-heading {
+    font-size: 1.4em;
+  }
+
+  .subheading {
+    font-size: 1.2em;
+  }
+
+  .paragraph {
+    font-size: 0.95em;
+  }
+
+  .intro-block,
+  .content-block,
+  .profile-block,
+  .tech-block,
+  .message-block,
+  .links-block {
+    padding: 1em;
+  }
+}
