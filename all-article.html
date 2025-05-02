@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- タイトル -->
+    <title>New!! ハイスペラボ</title>
+
+    <!-- meta設定 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
+
+    <!-- 他のhead系統のコードは後ほど追加 -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h2 class="title">
+        <span class="title-new-N">N</span><span class="title-new-E">E</span><span class="title-new-W">W</span><span class="title-new-B">!!</span>
+        <span class="Japanese title-enjoy">ハイスペラボ</span>
+      </h2>
+      <ul class="header-menu">
+        <li class="header-menu-items"><a class="Japanese" href="#">記事</a></li>
+        <li class="header-menu-items"><a class="Japanese" href="#">このサイトについて</a></li>
+        <li class="header-menu-items"><a class="Japanese" href="#">デバックノート</a></li>
+        <li class="header-menu-items"><a class="Japanese" href="#">付箋</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <!-- 検索フォーム -->
+      <div class="container">
+        <form id="searchForm">
+          <input type="text" id="searchInput" placeholder="検索キーワードを入力" />
+          <button type="submit" aria-label="検索ボタン">検索</button>
+        </form>
+
+        <!-- 検索結果を表示する場所 -->
+        <div id="results"></div>
+      </div>
+      
+      <p class="title-card-content">//検索機能は試作段階です。バグやおかしなところがあったら、<a href="#">こちら</a>でお問い合わせしてください。
+
+      <h1 class="category">記事一覧</h1>
+
+      <div class="articles-menu">
+        <!-- 記事 -->
+        <div class="title-card">
+          <img class="title-card-image" src="https://example.com" alt="最初の記事">
+          <h2 class="title-card-title"><a href="#">ブログを始めました</a></h2>
+          <p class="title-card-content">
+            私がブログを始めた理由とブログに何を書くかを深掘りします。
+          </p>
+          <p class="title-card-date">2025/5/3</p>
+        </div>
+        <!-- 記事 -->
+      </div>
+    </main>
+
+    <footer>
+      <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+      <p class="Japanese">
+        <a href="#">ホーム</a> | <a href="#">ブログの紹介</a> | <a href="#">デバックノート</a> | <a href="#">私の付箋</a>
+      </p>
+      <p><img class="github" src="#"></p>
+    </footer>
+  </body>
+</html>
