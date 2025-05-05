@@ -79,6 +79,10 @@ main {
   text-decoration-line: underline;
 }
 
+.section {
+  font-size: 0.9em;
+}
+
 .marker-text {
   text-decoration: underline;
 }
