@@ -1,0 +1,19 @@
+
+/* ここから */
+section{
+  font-family: "Klee One", sans-serif
+}
+
+.articleCategory{
+  border-bottom: solid 0.1em  #e83929;
+  display: inline;
+}
+
+
+.articleScene {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333;
+  border-top: 3px solid #c9171e;  /* 上に青い線 */
+  border-bottom: 3px solid #c9171e;  /* 下に青い線 */
+}
