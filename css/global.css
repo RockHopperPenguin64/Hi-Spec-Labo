@@ -114,6 +114,11 @@ main {
   font-family: "Klee One", serif;
 }
 
+.github {
+  width: 0.2em;
+  hight:0.2em;
+}  
+
 /* カードの画像 */
 .card-img {
   width: 100%;
