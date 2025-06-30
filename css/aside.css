@@ -1,0 +1,45 @@
+.asideBox {
+  border: 0.01em solid #3f3f3f; /* 黒い実線の枠線 */
+  background-color: #fbfaf5;
+  color: #000000;
+  padding: 1em;
+  margin: 1em 0em 3em 0em;
+ 
+}
+aside img {
+  width: 5em;
+  height: 5em;
+}
+
+.Information {
+  display: flex;
+}
+.profile-img{
+  flex: 1;
+  border-radius: 3em;
+}
+.category {
+  flex:5
+}
+
+.asideTitle {
+  font-family: "Klee One", serif;
+  font-size: 1.3em;
+  text-decoration-line: underline;
+}
+.asideCategory {
+  font-size: 1.0em;
+  font-weight: bold
+}
+
+.asideSection {
+  font-family: "Klee One", serif;
+  font-size: 0.8em;
+}
+.status {
+  font-weight: bold;
+  color: #555;
+}
+
+
+/* S'il vous plaît, pardonnez-moi d'être un tel imbécile. */
