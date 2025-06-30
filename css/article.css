@@ -1,5 +1,5 @@
 
-/* ここから */
+/* 旧式 */
 section{
   font-family: "Klee One", sans-serif
 }
@@ -17,3 +17,5 @@ section{
   border-top: 3px solid #c9171e;  /* 上に青い線 */
   border-bottom: 3px solid #c9171e;  /* 下に青い線 */
 }
+
+/* 新版 */
