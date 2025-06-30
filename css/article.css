@@ -23,7 +23,7 @@ section{
 /* 基本スタイル */
 main {
   display: flex;
-  font-family: "Klee One", sans-serif
+  font-family: "Klee One", sans-serif;
   margin: 0 5em;
   gap: 2em; /* article と aside の間 */
 }
