@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rockhopperpenguin64.github.io/Hi-Spec-Labo/sitemap.xml
