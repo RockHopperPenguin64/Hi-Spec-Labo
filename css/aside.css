@@ -16,6 +16,7 @@ aside img {
 }
 .profile-img{
   flex: 1;
+  border-radius: 3em;
 }
 .category {
   flex:5
