@@ -20,6 +20,9 @@ section{
 
 /* 新版 */
 
+article img {
+    margin: 1em;
+}
 /* 基本スタイル */
 main {
   display: flex;
