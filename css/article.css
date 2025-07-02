@@ -39,6 +39,97 @@ aside {
   flex: 1;
   margin-top: 10em;
 }
+/* ここから */
+main{
+  font-family: "Klee One", sans-serif
+}
+
+h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: #9e2a2f;
+}
+
+ul li {
+  padding-top; 1em;
+  padding-bottom: 1em;
+}
+
+.Err{
+  color: #F08080;
+  font-weight: bold;
+  background-color: #F5F5F5;
+  padding: 2em;
+  border-radius: 2em;
+}
+
+.me{
+   display: flex;
+}
+
+.me-img {
+  margin: 0.5em;
+  border-radius: 1em;
+}
+
+.me-text {
+  background-color: #eaf4fc;
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 1em;
+}
+
+.chatGPT{
+  display: flex;
+}
+
+.chatGPT-img {
+  margin: 0.5em;
+  border-radius: 1em;
+}
+
+.chatGPT-text{
+  background-color: #fdeff2;
+  margin: 0.5em;
+  padding:0.5em;
+  border-radius: 1em;
+}
+
+.articleCategory{
+  border-bottom: solid 0.1em  #e83929;
+  display: inline;
+}
+
+
+.articleScene {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #333;
+  border-top: 3px solid #c9171e;  /* 上に青い線 */
+  border-bottom: 3px solid #c9171e;  /* 下に青い線 */
+}
+
+.category {
+  font-family: "Klee One", serif;
+  font-size: 1.5em;
+  text-decoration-line: underline;
+}
+
+
+
+.section {
+  font-size: 1em;
+}
+
+.marker-text {
+  text-decoration: underline;
+}
+
+
 
 /* レスポンシブ：700px以下で縦並び */
 @media (max-width: 700px) {
