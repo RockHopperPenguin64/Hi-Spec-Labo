@@ -21,6 +21,8 @@ section{
 /* 新版 */
 
 article img {
+  weight: 60vw;
+  height: auto;
     margin: 1em;
 }
 /* 基本スタイル */
@@ -75,6 +77,8 @@ ul li {
 }
 
 .me-img {
+  weight: 5vw;
+  height: auto;
   margin: 0.5em;
   border-radius: 1em;
 }
@@ -91,8 +95,8 @@ ul li {
 }
 
 .chatGPT-img {
-  weight: 1em;
-  height: 1em;
+  weight: 5vw;
+  height: auto;
   margin: 0.5em;
   border-radius: 1em;
 }
