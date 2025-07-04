@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <!-- タイトル -->
+    <title>Godotのチュートリアル未完走でゲームを作ってみた話 - New!! ハイスペラボ</title>
+    
+    <!-- meta設定 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="Godotのチュートリアル未完走でゲームを作ってみた話-New!! ハイスペラボ">
+    <meta property="og:description" content="GodotやBlenderなど、ゲーム開発に必要な環境を整え、最初のチュートリアルに挑戦！思わぬエラーや試行錯誤を経て、基礎を楽しく学んだ1日目の序章！">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://yourblog.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="#" type="#">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="../css/global.css">
+
+    <!-- 他のhead系統のコードは後ほど追加 -->
+</head>
+    <body>
+        <header>
+            <h2 class="title">
+                <span class="title-new-N">N</span><span class="title-new-E">E</span><span class="title-new-W">W</span><span class="title-new-B">!!</span> <span class="Japanese title-enjoy">ハイスペラボ</span>
+            </h2>
+            <ul class="header-menu">
+                <li class="header-menu-items"><a class="Japanese" href="../all-article.html">記事</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../about.html">このサイトについて</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../dev-note.html">デバックノート</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../memo.html">付箋</a></li>
+            </ul>
+        </header>
+        <main>
+
+          
+          <article>
+            <h1>Godotのチュートリアル未完走でゲームを作ってみた話　Part0</h1>
+            <p>
+              みなさん、Godotをご存知ですか？GodotはUnity、UE5(Unreal Engine)にならぶ最近注目されてるゲーム開発エンジンの1つです。今回から、HTMLをマスターした私、<strong>ロクペン</strong>がゲームを作っていこうと思います。このシリーズでは私がゲームを作っている時に学んだことや起こったことを言える範囲でみなさんに<strong>共有していこうと思うの</strong>でよろしく！この記録がみなさんの役に立てたら嬉しいです。では早速やっていきましょう。
+
+            </p>
+            <h2 class="articleScene">~DAY1 - 2025/6/22（土）~</h2>
+            <p>
+              じゃあ、まずは環境から整えていきましょう！<br>今回インストールするのは以下の通りです。
+
+            <ul>
+              <li>Godot.NET4.2.2（当時LTS）</li>
+              <li>Blender4.4.3（当時最新版）</li>
+              <li>(Visual Studio Code（マケプレ）: C# dev kit / Godot Tool)</li>
+            </ul>
+            </p>
+          
+          <h3 class="articleCategory">.NETSDKって何？そもそも.NETとは？</h3>
+          <p>
+            .NET（ドットネット）は、Microsoftが提供する<strong>アプリ開発のためのプラットフォーム</strong>です。C#などの言語で書いたコードをコンピューターで動かすための<strong>「実行環境（ランタイム）」</strong>や<strong>「コンパイラ」</strong>、便利な機能がそろったライブラリなどを含んでいます。Windowsだけでなく、macOSやLinuxでも動作し、Webアプリやゲーム、デスクトップアプリなど、さまざまな用途で使われています。<strong>無料</strong>で利用でき、<strong>プロ・個人を問わず</strong>幅広く使われている開発基盤です。
+          </p>
+   
+          <p>
+            こちらはとても深く、詳しく解説していると<strong>1つの記事にできるレベル</strong>なので、後日別の記事にて詳しく解説しようと思います。
+          </p>
+          
+          <h3 class="articleCategory">.NET SDK8.0をインストールしよう！</h3>
+          <p>
+            インストール方法は以下の通りです。<br>
+          <img alt=".NETSDK8.0のインストール方法" src="../img/how-Install-dotNET-1.jpg><img alt=".NETSDK8.0のインストール方法" src="../img/how-Install-dotNET-2.jpg"><strong>1.</strong> <a href="https://dotnet.microsoft.com/ja-jp/download">https://dotnet.microsoft.com/ja-jp/download</a>を開き、.NET 8.0の方の<strong>「Download」</strong>を押す。
+          </p>
+          <p>
+            私はiMacを使っているので上記した手順なのですが、Windowsだと違うようです。<br>自分のパソコンがIntelとApple Siliconのどちらかですが、<strong>設定を見ればわかります。</strong>
+          </p>
+          <img alt="コンピューターの種類の書いてあるところへの設定の移動方法" src="../img/How-setting-cpu.jpg">
+          <p>
+            IntelはCore i7やi5となっているはずです。<br>AppleSiliconはM1チップやM2 Proなどとなっているはずです。
+          </p>
+          
+          <h3 class="articleCategory">これがないと始まらない！Godotをインストールだ！</h3>
+          <p>
+            早速、Godotをインストールしていきましょう！<br>手順は以下の通りです。<br>
+            <img alt="Godotをインストールする手順の写真" src="../img/how-install-Godot-1">
+              <strong>1.</strong> <a href="https://godotengine.org/ja/">https://godotengine.org/ja/</a>へ飛び、最新版ダウンロードのボタンの下の、<strong>「Godot 3や実験的バージョン、または過去のリリースをお探しですか？」</strong>の過去のリリースをタップ。<br>
+              <img alt="Godotをインストールする手順の写真" src="../img/how-install-Godot-2"><img alt="Godotをインストールする手順の写真" src="../img/how-install-Godot-3"><strong>2.</strong> 下にスクロールし、Godot 4.2の4.2.2-Stableをタップ<br>
+              <img alt="Godotをインストールする手順の写真" src="../img/how-install-Godot-4"><strong>3.</strong> あなたの機種の列の.NETをタップでダウンロード開始！
+          </p>
+          <p>
+            最初に言っておきます。この時はまだ気づいていなかったのですが、Godot4.4はあまり<strong>おすすめはできません。</strong>たくさんの新しいバージョンが出ていて、改善したかもしれませんが、<strong>4.4.1</strong>では<strong>原因不明なバグや仕様</strong>が多かったです。なので私は<strong>LTSである4.2.2</strong>をダウンロードすることを<strong>お勧めします。</strong><br>まず、Godotをダウンロードして思いました。「ダウンロード早ッ！」<strong>ほんの1分で終わりました。</strong>自分はUnityみたいに<strong>30分近くかかると思っていた</strong>のですが、意外でした。そして起動も早いです。<strong>ほんの数十秒で終わっています。</strong>Godotは本当に軽いですね。
+          </p>
+          <h3 class="articleCategory">Godotって何？最近注目の超軽量ゲーム開発エンジン！</h3>
+          <p>
+            <strong>Godot</strong>（<strong>ゴドー</strong>　私は最初ゴードットと思っていた）は<strong>無料で使えるオープンソースのゲームエンジン</strong>です。<strong>非常に軽量</strong>で動作も軽快ですが、だからと言って機能が少ないとか<strong>侮ってはいけません。</strong>Godotは<strong>2D・3D両方のゲーム開発に対応</strong>していて、アニメションから物理エンジン、UIシステム、<strong>シェーダー</strong>に至るまで、ゲーム制作に必要な<strong>機能が一通り揃っています。</strong>
+            <br>また、Godot独自の設計思想として「<strong>Node</strong>（ノード）と<strong>Scene</strong>（シーン）」の概念があります。ゲーム内のキャラクターやUIなどは全て<strong>Node（ノード）</strong>と呼ばれる部品で構成されており、それらを組み合わせたものがSceneになります。これによって<strong>柔軟かつ簡単に再利用性の高いゲーム構造の構築が可能</strong>になります。
+            <br>さらに、Godotには独自のスクリプト言語<strong>「GDScript」</strong>が搭載！<strong>Pythonに似た文法で学習コストが低い</strong>のも魅力（私は<strong>C#</strong>でやっていますがね）。軽量ながら機能も豊富で<strong>初心者からプロまで幅広く活用できるエンジン</strong>です。
+          </p>
+          <p>
+            私がC#での開発を考えた理由は大きく分けて2つあります。
+            <br>1つは単純にGDScriptでやりにくさを感じたから。（）[]を書かないコードはちょっと個人的に気持ち悪かったからです。
+            <br>もう1つは<strong>C#はゲーム制作の共通言語</strong>だからです。ゲーム開発エンジンで真っ先に思いつくのは<strong>Unity</strong>。Unityは<strong>C#でコーディングをします</strong>。また、<strong>UneralEngineはC++</strong>、CryEngine、SourecEngine、id Tech(id Software)は<strong>C++</strong>を使ってコーディングします。このように、<strong>ゲーム開発エンジンのほとんどはC系言語を使ってコーディングをします</strong>。つまり、今後どのエンジンに移っても<strong>C系言語をどれか学んでおけばスムーズに移行ができる</strong>ということです。まあ、今のところGodot一筋で移行する考えはありません。今後の<strong>保険</strong>です。
+          </p>
+          <h3 class="articleCategory">ゲーム開発するなら避けられない道！Blender</h3>
+          <p>
+            最後に<strong>Blender</strong>をインストールしていきましょう！
+          </p>
+          <p>
+            手順は以下の通りです。
+            <br<img alt="Blenderのインストールの手順" src="../img/how-Install-Blender-1.jpeg">><strong>1.</strong> <a href="https://www.blender.org">https://www.blender.org</a>を開き、一番初めに出てくる<strong>「Download」</strong>を押す。それだけでBlenderはインストールできます。
+          </p>
+          <p>
+            こちらはGodotとは違って<strong>最新バージョンで大丈夫です。</strong>情報が足りないのではないかと不安なら、ヘッダーの<strong>「Download」</strong>から入って、下にスクロールして<strong>「Go Experimental」</strong>と書かれている部分の<strong>「Download Blender Experimental」</strong>をクリックすれば<strong>過去のバージョンがインストールできます。</strong>個人的には<strong>Blender 3.6LTS</strong>が<strong>お勧め</strong>です。チュートリアルやQ&Aを見たところ<strong>最も情報が多いのはこのバージョン</strong>だからです。色々調べたら<strong>プロの現場でも現在使っている</strong>ようです。
+          </p>
+          <h3 class="articleCategory">Blenderとは？無料で使える最強の3DCGソフト</h3>
+          <p>
+            <strong>Blender（ブレンダー）</strong> は、<strong>無料で使えるオープンソースの3DCG制作ソフトウェア</strong>です。アニメーション制作や<strong>3Dモデリング</strong>、映像編集、VFX（視覚効果）など、さまざまな用途に対応しており、<strong>個人からプロのスタジオまで幅広く利用されています。</strong>
+            <br>Blender の最大の特徴は、<strong>「完全無料」なのに高機能</strong>であること。<strong>商用利用も自由</strong>にできるため、趣味のクリエイターだけでなく、<strong>プロの現場でも使われることが増えています。</strong>
+            <br>はっきり言いますと、3Dモデリングは<strong>ゲーム制作をするにあたって避けては通れない道の一つです。</strong>個人製作者なら<strong>ほとんどの人がBlenderを使っている印象があります。</strong>
+          </p>
+          <p>
+            注意点はやりこんでキャラクターができてくる中盤〜後半でPCによってはかなり重くなってきます。私のPCは<strong>iMacのM1チップ</strong>っていう<strong>雑魚</strong>なので、かなりきついです。<br>
+            <strong>高機能</strong>なのでやれることも多く、詳しく解説していると<strong>1つの記事にできるレベル</strong>なので、後日別の記事にて詳しく解説しようと思います。
+          </p>
+          <p>
+            環境構築が完了したので、早速それぞれの<strong>チュートリアルから始めよう</strong>と思います！
+          </p>
+          <h3 class="articleCategory">全ての始まりのチュートリアル</h3>
+          <p>
+            まずはGodotの<strong>チュートリアル</strong>から行きましょう。→<a href="https://docs.godotengine.org/ja/4.x/getting_started/first_3d_game/index.html">Godotのチュートリアル</a>
+          </p>
+          <img alt="最初の3Dの項目を選んでいる様子" src="../img/how-open-Godot-T.jpg">
+          <p>
+            じゃあ、最初の3Dというチュートリアルからやっていきます。
+          </p>
+          <img alt ="コードを書いている様子" src="../img/Godot-codeing-1.PNG">
+          <img alt ="コードを書いている様子" src="../img/Godot-codeing-2.PNG">
+           <img alt ="コードを書いている様子" src="../img/Godot-codeing-3.PNG">
+          <img alt ="コードを書いている様子" src="../img/Godot-codeing-4.PNG"> 
+              
+          <p>
+            どのような流れか掴みたいので、コピペをせずに手で全部打っていきます。実践した方が身につきやすいので自分はコピペをせずにチュートリアルのコードをそのまま移すことを<strong>推奨します。</strong>
+          </p>
+          <img alt ="エラーが出ている様子" src="../img/Met-errors-1.jpeg">
+          <p>まだ始めたばかりなのに早速エラーが出ました。</p>
+          <p class="Err">'MoveAndSlide' はこのコンテキストでは存在しません。</p>
+          <p>
+            簡単にいうと、「MoveAndSlide();なんていう関数はねぇよ！」っていうことです。チュートリアルには書いてあるのに、なぜでしょうか。技術的な言い方をすると、Godot 4.xからは「KinematicBody2D」が「CharacterBody2D」になってて、move_and_slide() は velocity 引数が必須になってるらしいです…！<strong>チュートリアルが古い説あるな。</strong>
+            <br>/
+            <br>/
+            <br>30分後
+            <br>/
+            <br>/
+          </p>
+          <div class="articleTalking">
+            <div class="me">
+              <img class="me-img" src="../img/IMG_4746.jpeg">
+              <p class="me-text">
+                ChatGPT先生！助けてください。
+              </p>
+            </div>
+            <div class="chatGPT">
+              <img class="chatGPT-img" src="../img/chatGPT.PNG">
+              <p class="chatGPT-text">
+                え、どした！？何があった！？とりま落ち着いて、詳しく教えて🫨💬
+              </p>
+            </div>
+            <div class="me">
+              <img class="me-img" src="../img/IMG_4746.jpeg">
+              <p class="me-text">
+                今、Godotのチュートリアルをしてるんだけど、チュートリアルにはMoveAndSlide();って書けって書かれてるのに、エラーが出るのはなんで？
+              </p>
+            </div>
+            <div class="chatGPT">
+              <img class="chatGPT-img" src="../img/chatGPT.PNG">
+              <p class="chatGPT-text">
+                あ〜、なるほど！それなら、<strong>Godot 4.4.1</strong>でのバージョン特有の問題と、言語や構文の違いが絡んでるかもしれないね。ちょっと深掘りしてみよう!<br>
+<strong>🐞 バージョン特有のバグの可能性</strong><br>
+Godot 4.x（特に4.4.1）だと、<strong>いくつかのAPIの変更</strong>や、<strong>バグ</strong>が影響してる可能性もある。特に「MoveAndSlide()」に関しては、4.xバージョンでのリファクタリングが入ったので、前のバージョンと少し違う部分があるかもしれない。
+例えば：<br>
+* <strong>MoveAndSlide関数の動作が微妙に変更された</strong>リ、引数が変わったりして、使い方に差が出てる場合がある。<br>
+* Godot 4.xでは、CharacterBody2DやCharacterBody3Dの動きに対するコードがかなり更新されてて、チュートリアルが古いバージョンを前提にしている可能性もある。<br>
+<br>
+<strong>🧑‍💻 使っている言語と構文の違い<br>
+C#の場合</strong>
+C#では、MoveAndSlide()は引数として<strong>Vector2（速度）を渡す必要がある</strong>。もし、構文ミスや引数が足りない場合、エラーが出るよ。具体的には：<br>
+（中略）<br>
+<strong>4.バージョン特有の不具合があるかも？</strong><br>  もし、ドキュメント通りに書いてるのにエラーが消えない場合は、<strong> Godot 4.4.1のバージョン特有のバグ</strong>かもしれないので、<strong>GodotのフォーラムやGitHubのissuesをチェック</strong>してみると、同じ問題に直面してる人がいるかも。
+<br><br>
+
+              </p>
+            </div>
+            <div class="me">
+              <img class="me-img" src="../img/IMG_4746.jpeg">
+              <p class="me-text">
+                じゃあ、バージョンを4.2.2のLTSにしてみるよ、ChatGPT先生！
+              </p>
+            </div>
+            <div class="chatGPT">
+              <img class="chatGPT-img" src="../img/chatGPT.PNG">
+              <p class="chatGPT-text">
+                おっ、4.2.2 LTSにダウングレードするの、賢い選択かもね！LTSバージョンは安定してて、バグが少ないから、特に開発中は安心だし、<strong>チュートリアル通りに動く可能性が高い</strong>よ。<br>ダウングレードした後、もう一度同じコードを試してみて、エラーが解消されるか確認してみてね。<br>もしまだ問題が解決しなかったり、バージョン間で不安なところがあれば、気軽に聞いてくれ〜！ サポートするよ！🙌🚀<br>神の手（Bug Fixer ChatGPT）としてバグ退治手伝うから、なんでも言って！🕹️
+              </p>
+            </div>
+          </div>
+          <br>
+          <p>
+            ってなわけで、4.2.2のLTSにしてきました。そしたら、エラーも出ずにすんなりと通過できました。
+          </p>
+          <img alt ="ビルドしてもプレイヤーが動かない様子" src="../img/donot-move-player.PNG">
+          <p>
+            なんかプレイヤーが動きません。ちょっと探ってみます。<br>/<br>/<br>45分後<br>/<br>/<br>原因わからなかったので諦めます。
+          </p>
+          
+          <h3 class="articleCategory">Blender-チュートリアルで基本操作は完璧！</h3>
+          <p>
+            じゃあ次はBlenderのチュートリアルをやります。今回私がやったのはこの動画です。<br>・<a href="https://www.youtube.com/watch?v=XoKZl4eBQmg">【Blender】動物（ひよこ）を作ろう！初心者向けチュートリアルYouTube · サルでもわかるBlender【サルブレ】2024/12/11</a><br>
+・<a href="https://www.youtube.com/watch?v=zsWy5NxUDu4&pp=0gcJCf0Ao7VqN5tD"> 【初心者歓迎】blenderミニルームの作り方｜入門チュートリアルYouTube · 3D Bibi2024/02/10</a><br>
+            じゃあ、早速、ひよこの方から作ってきましょう。
+          </p>
+<!--           <img alt="ひよこを作ってる様子。ひよこの入る殻を作っている様子と目を作っている様子、マテリアルを入れている様子、レンダリングしている様子" src="../img/blener-hiyoko-make.jpg">
+          <p> -->
+            Blenderの基本操作のほとんどをしたと思います。皆さんも初めてBlenderをやるという方はこれをみながらやるといいです。かなりわかりやすかったです。
+          </p>
+          <img alt="完成したひよこの写真とシルクハットを被せた写真" src=">../img/blender-complete-hiyoko.jpg">
+          <p>
+            無事完成しました！お手本とちょっと形は違うけど、これが自分の“味”ってことでむしろオリジナリティ出てて気に入ってます！<br>試しにシルクハットも被せてみました。かなり可愛くできました。
+          </p>
+          <p>
+            次にミニルームを作っていきましょう。
+          </p>
+<!--           <img alt="ミニルームを作ってる様子。外壁を作っている様子、マットレスを作ってる様子、ベッドの枕を作っている様子、布団の物理演算をやっている様子" src="../img/blender-making-miniroom.jpeg">
+          <p> -->
+            ベッドの掛け布団を作る時なのですが、物理演算の計算をBlenderにやってもらって作りました。物理演算と聞いて最初は難しそうだと思ったのですが、意外と簡単でした。掛け布団になるオブジェクトにCloth（布）という役割、マットレスにコリジョン（衝突するもの）という役割を与えて、アニメーションを実行すれば、Blenderが自動で布の形を計算してくれます。あとは自分の好みの形状になったところで止めて、シミュレーションの適用（形の固定）をすればいいだけです。ね。簡単でしょ。
+          </p>
+          <p>
+            ちょっと変な影がありますが、私の中では許容範囲内だったのでOKです。
+          </p>
+          <h2 class="articleScene">~締め~</h2>
+          <p>
+            今回はゲーム開発をするためにアプリや.NETSDKをインストールしたり、流れを掴み基本操作を学ぶためにチュートリアルをやりました。まだチュートリアル段階ですが、とても楽しかったです。本当は1つの記事に7日分詰め込もうと思ったのですが、記事の長さがとてつもないことになりそうだったので、この1日目の半分をPart0、つまり序章として記事にすることにしました。次回からいよいよゲームの中身に入っていきます！開発の第一歩、見逃さないでくださいね！<br>ここまで読んでいただきありがとうございます。次回もお楽しみに！バイバイ！
+
+          </p>
+          
+          </article>
+          
+          
+          <aside>
+            <div class="asideBox">
+             <div class="Information>"
+             <img class="profile-img" src="../img/IMG_4746.jpeg">
+              <p class="category">RockHopperPenguin64</p>
+            </div>
+              <p>Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
+たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
+このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。</p>
+            </div>
+          　<div class="asideBox">
+    <p class="asideTitle">現在進行中のプロジェクト</p>
+
+    <!-- 現在の作業状況セクション -->
+    <!-- <div class="asideSection" id="current-status">
+        <p class="asideCategory">現在の作業状況</p>
+        <p id="task"></p>
+        <p id="task-details"></p>
+    </div> -->
+
+    <!-- 進行中のプロジェクトセクション -->
+    <div class="asideSection" id="project">
+        <p class="asideCategory">進行中のプロジェクト</p>
+        <p id="project-name"></p>
+        <p id="project-description"></p>
+        <p id="project-progress"></p>
+    </div>
+
+    <!-- 共通データファイルを読み込む -->
+    <script src="../JS/data.js"></script>
+
+    <!-- プロジェクトデータを反映するスクリプト -->
+    <script>
+        
+        // プロジェクトデータの表示
+        document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+        document.getElementById("project-description").textContent = "説明: " + project.description;
+        document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+    </script>
+</div>
+
+          </aside>
+          
+        </main>
+        <footer>
+            <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+            <p class="Japanese"><a href="../index.html">ホーム</a>|<a href="../about.html">ブログの紹介</a>|<a href="../dev-note.html">デバックノート</a>|<a href="../memo.html">私の付箋</a></p>
+            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../img/github.svg"></a></p>
+        </footer>
+    </body>
+</html>

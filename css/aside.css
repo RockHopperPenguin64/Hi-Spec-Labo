@@ -1,3 +1,4 @@
+/* aside.css */
 .asideBox {
   border: 0.01em solid #3f3f3f; /* 黒い実線の枠線 */
   background-color: #fbfaf5;
@@ -16,7 +17,6 @@ aside img {
 }
 .profile-img{
   flex: 1;
-  border-radius: 3em;
 }
 .category {
   flex:5
@@ -35,11 +35,9 @@ aside img {
 .asideSection {
   font-family: "Klee One", serif;
   font-size: 0.8em;
+  text-decoration-line: underline;
 }
 .status {
   font-weight: bold;
   color: #555;
 }
-
-
-/* S'il vous plaît, pardonnez-moi d'être un tel imbécile. */
