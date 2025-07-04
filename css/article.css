@@ -76,8 +76,9 @@ ul li {
    display: flex;
 }
 
-.me-img {
-  weight: 5vw;
+.me-img, .chatGPT-img {
+  width: 5vw;
+  max-width: 100%;
   height: auto;
   margin: 0.5em;
   border-radius: 1em;
@@ -92,13 +93,6 @@ ul li {
 
 .chatGPT{
   display: flex;
-}
-
-.chatGPT-img {
-  weight: 5vw;
-  height: auto;
-  margin: 0.5em;
-  border-radius: 1em;
 }
 
 .chatGPT-text{
