@@ -19,11 +19,11 @@ section{
 }
 
 /* 新版 */
-
 article img {
-  weight: 60vw;
+  width: 60vw;
+  max-width: 100%;
   height: auto;
-    margin: 1em;
+  margin: 1em;
 }
 /* 基本スタイル */
 main {
