@@ -65,7 +65,8 @@ button:hover {
 
 /* カードの画像 */
 .title-card-image {
-  width: 30vw;
+  aspect-ratio: 1.414 / 1;
+  width: 100%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 15px;
