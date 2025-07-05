@@ -79,7 +79,7 @@ ul li {
 .me-img, .chatGPT-img {
   width: 5vw;
   max-width: 100%;
-  height: auto;
+  height: 5vw;
   margin: 0.5em;
   border-radius: 1em;
 }
