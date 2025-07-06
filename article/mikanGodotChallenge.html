@@ -246,49 +246,39 @@ C#では、MoveAndSlide()は引数として<strong>Vector2（速度）を渡す�
           
           </article>
           
-          
           <aside>
-            <div class="asideBox">
-             <div class="Information>"
-             <img class="profile-img" src="../img/IMG_4746.jpeg">
-              <p class="category">RockHopperPenguin64</p>
-            </div>
-              <p>Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
-たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
-このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。</p>
-            </div>
-          　<div class="asideBox">
+  <div class="asideBox">
+    <div class="Information">
+      <img class="profile-img" src="../img/IMG_4746.jpeg" />
+      <p class="category">RockHopperPenguin64</p>
+    </div>
+    <p>
+      Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
+      たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
+      このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+    </p>
+  </div>
+
+  <div class="asideBox">
     <p class="asideTitle">現在進行中のプロジェクト</p>
 
-    <!-- 現在の作業状況セクション -->
-    <!-- <div class="asideSection" id="current-status">
-        <p class="asideCategory">現在の作業状況</p>
-        <p id="task"></p>
-        <p id="task-details"></p>
-    </div> -->
-
-    <!-- 進行中のプロジェクトセクション -->
     <div class="asideSection" id="project">
-        <p class="asideCategory">進行中のプロジェクト</p>
-        <p id="project-name"></p>
-        <p id="project-description"></p>
-        <p id="project-progress"></p>
+      <p class="asideCategory">進行中のプロジェクト</p>
+      <p id="project-name"></p>
+      <p id="project-description"></p>
+      <p id="project-progress"></p>
     </div>
 
-    <!-- 共通データファイルを読み込む -->
-    <script src="../JS/data.js"></script>
-
-    <!-- プロジェクトデータを反映するスクリプト -->
+    <script src="../JavaScript/data.js"></script>
     <script>
-        
-        // プロジェクトデータの表示
-        document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
-        document.getElementById("project-description").textContent = "説明: " + project.description;
-        document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+      // プロジェクトデータの表示
+      document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+      document.getElementById("project-description").textContent = "説明: " + project.description;
+      document.getElementById("project-progress").textContent = "進捗: " + project.progress;
     </script>
-</div>
+  </div>
+</aside>
 
-          </aside>
           
         </main>
         <footer>
