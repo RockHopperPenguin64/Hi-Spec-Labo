@@ -152,7 +152,7 @@ main {
 
 /* カードの画像 */
 .card-img {
-  width: 100%;
+  width: 30vw;
   height: 100%;
   margin: 1em 0.3em 1em 0;
 }
