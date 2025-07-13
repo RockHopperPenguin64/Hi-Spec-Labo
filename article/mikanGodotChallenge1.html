@@ -355,7 +355,7 @@ public partial class player_magic : CharacterBody3D
   <p>まずはジャンプ力っていうかジャンプ時の上昇量を決めましょう。おそらくこの変数は<strong>頻繁に変えることになる</strong>ので、<strong>[Export]でパラメーター化しちゃいましょう！</strong></p>
   <pre><code class="language-cshape">
 [Export]
-purlic float JumpPower = 1.0f;
+public float JumpPower = 1.0f;
 </code></pre>
   <p>パラメーターにする数字は<strong>初期値を入れるかテキトーな数字を入れる</strong>とかしておいてください。私は初期値を入れました。</p>
   <p>では次に、ジャンプをする仕組みを作っていきましょう。</p>
@@ -369,7 +369,7 @@ purlic float JumpPower = 1.0f;
   <img alt="ジャンプの軌道の様子" src="../img/Art-jump-player.jpg">
   <p>では早速これをコードにしていきましょう。</p>
   <pre><code class="language-cshape">
-if (IsOnFloot() && Input.IsActionJustPressed("Jump"))
+if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
 {
     direction.Y = JumpPower;
 }
