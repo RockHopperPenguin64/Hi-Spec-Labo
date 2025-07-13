@@ -49,6 +49,11 @@ main{
   font-family: "Klee One", sans-serif
 }
 
+pre {
+  border-bottom: solid 0.3em  #e83929;
+  border: 0.2em;
+}
+
 h1 {
   font-size: 1.8em;
   font-weight: 600;
@@ -60,7 +65,7 @@ a {
 }
 
 ul li {
-  padding-top; 1em;
+  padding-top: 1em;
   padding-bottom: 1em;
 }
 
