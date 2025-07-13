@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- タイトル -->
+    <title>Godotのチュートリアル未感想でゲームを作ってみた話【Godot】【ゲーム開発】【C#】 - New!! ハイスペラボ</title>
+
+    <!-- meta設定 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OGP設定 -->
+    <meta property="og:title" content="Godotのチュートリアル未完走でゲームを作ってみた話【Godot】【ゲーム開発】【C#】 - New!! ハイスペラボ">
+    <meta property="og:description" content="これはGodotでのゲーム作りの開発日誌です。今回はDay1の続きとDay2とDay3でやったことをまとめ、コードの解説をしました。">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://yourblog.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
+
+    <!-- ファビコン -->
+    <link rel="icon" href="../img/favicon.jpeg" type="image/jpeg">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/aside.css">
+
+    <!-- Highlight.js 本体 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- C#用の言語パック（任意だけど推奨） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+
+    <!-- 初期化スクリプト -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        hljs.highlightAll();
+      });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h2 class="title">
+            <span class="title-new-N">N</span>
+            <span class="title-new-E">E</span>
+            <span class="title-new-W">W</span>
+            <span class="title-new-B">!!</span>
+            <span class="Japanese title-enjoy">ハイスペラボ</span>
+        </h2>
+        <ul class="header-menu">
+            <li class="header-menu-items"><a class="Japanese" href="../all-article.html">記事</a></li>
+            <li class="header-menu-items"><a class="Japanese" href="../about.html">このサイトについて</a></li>
+            <li class="header-menu-items"><a class="Japanese" href="../dev-note.html">デバックノート</a></li>
+            <li class="header-menu-items"><a class="Japanese" href="../memo.html">付箋</a></li>
+        </ul>
+    </header>
+    <main>
+        <article>
+          <h1>Godotのチュートリアル未完走でゲームを作ってみた話　Part1</h1>
+          <p>
+            みなさんはBlenderを使っていますか？現在（2025/07/03）私は永遠とキャラクターのモデルを作り続けています。進んでないわけではないのですが、ずっと同じことをやっている気がします。ゲーム制作を行なってるみなさんも気をつけるべきだと思います。
+          </p>
+          <h2 class="articleScene">〜注意事項〜</h2>
+          <p>
+            この記事は、<strong>「条件分岐」や「関数」</strong>など、<strong>プログラミングの基本的な概念を知っていることを前提に書かれています。</strong><br>基礎的な内容にはあまり触れていないため、もしそういった知識がまだない場合は、入門向けの記事を先に読むことをおすすめします。（今はちょっと余裕がなくて書けていませんが、今後は初心者向けの記事も投稿する予定です。お楽しみに！）<br>また、すでに<strong>C#をしっかり理解している方にとっては</strong>、退屈な内容に感じられるかもしれません。<br>ですが、初心に戻って基本の意味を改めて確認してみるのも、<strong>新しい発見につながるかもしれません。</strong>
+          </p>
+          <h2 class="articleScene">~Day1 2025/6/23~</h2>
+          <p>
+            環境構築も終わりましたし、ゲーム制作の方に入っていこう！<br>…と言いたいところですが、何を作るか決まってすらいないのに、いきなり制作を始めるなんてできません。ということで、まずは <storng>「どんなゲームを作るか」 </strong>を決めていきましょう。
+          </p>
+          <h3 class="articleCategory">アイデアづくり① ー ジャンルを考える</h3>
+          <p>
+            何がいいでしょうか？<br>やっぱり、マリオとかカービィみたいな<strong>2D横スクロール</strong>アクションが作りやすそうだし王道っぽい。<br>&#x2028;でもちょっと憧れちゃうのは<strong>3Dアクション</strong>。立体的な空間で、自由に動き回れるゲームとかいいなぁ。<br>じゃあ一回、候補をざっと書き出してみます：
+          </p>
+          <ul>
+            <li><strong>2D横スクロール</strong></li>
+            <li><strong>3Dアクション</strong></li>
+            <li><strong>シミュレーション</strong></li>
+          </ul>
+          <p>
+            3Dアクションと2D横スクロールで正直めっちゃ迷ってる。<br>&#x2028;3Dの世界で縦横無尽に動き回って、ボスとバトルとか…想像しただけでめっちゃ楽しそう。でも初心者が作るって言ったら、やっぱり<strong>2Dアクションゲーム</strong>が現実的だしなあ……。
+          </p>
+          <p>
+            <strong>いっそのこと、混ぜてしまえば？</strong><br>そうだ、もう<strong>混ぜちゃおう</strong>。2Dベースで操作はシンプルに。<br>でも、背景や演出はちょっと3Dっぽくして、ボス戦だけ急に立体感が出てくるとか――<strong>「見た目はシンプル、でも奥行きのあるゲーム」</strong>って、作れたらめっちゃ面白そうじゃない？<br>じゃあ、<strong>2.5Dアクション横スクロールゲーム</strong>にするっていう方向でやってこう！
+          </p>
+          
+          <h3 class="articleCategory">アイデアづくり② -ゲームの要素-</h3>
+          <p>
+            ゲームにするからどういう要素があるかとか決めていこう。<br>
+            まず、横スクロールゲームだから、<strong>左右移動</strong>、<strong>ジャンプは必須</strong>だよね。<strong>二段ジャンプ</strong>とかもできたら面白そうだな。攻撃だけど1種類とか2種類だと<strong>物足りなさそう</strong>だから10種類くらい作っちゃう。通常攻撃、通常弱攻撃、通常上攻撃、ため攻撃、強攻撃、上強攻撃、強ため攻撃、あとは必殺技とかかな。まあプレイヤーはこのぐらいにしておこう。
+            <br>横スクロールゲームの敵って1種類か2種類の攻撃しかしてこないよね。でもその方がギミックとして使いやすいけど、<strong>5種類くらい攻撃できるやつ</strong>がいても面白そう。<br>
+            <img alt="ステージの絵" src="../img/Art-stage-picture.jpg">ステージとかどういう感じにしようかな。カービィとかマリオみたいに<strong>区切りをつけてステージを移動する</strong>か。それか<strong>1つのでっかいマップ</strong>にしてその中を探索するとか。<strong>広いマップで探索できる</strong>ようにしたら面白いね。<br>
+            <img alt="コインとそれを消費すると貰えるもの" src="../img/Art-coin-crease.png">やっぱり王道の<strong>コイン</strong>は必要だよね。でもコインがあるってことはそれを<strong>消費しなければならないわけだ。</strong>何で消費させるか......<strong>スキル</strong>とか？それか<strong>服を買えるようにしてコスチュームを変えられる</strong>ようにしたらどうかな。面白そうだけど、技術的に<strong>難しそう</strong>だな。じゃあ、武器を買って自分を<strong>アップグレードできる</strong>ようにしたらどうだろう。例えば、今まで持ってた竹刀で攻撃すると攻撃力は+10しか足されないけど、鉄の剣にしたら攻撃力が+100されるみたいなふうにしたらいいんじゃね？武器のアップグレードはモデリングが服よりは簡単にはなるが、<strong>技術的難易度は変わらない</strong>かな。<br>
+            ストーリーとかどうしようか。やっぱりつけた方がいいかな。でも今作は<strong>作る方に集中したいからなくていい</strong>か。でもつけたいなぁ......じゃあ、<strong>モードとかを2つにしてストーリーあり</strong>と<strong>なし</strong>を分けたらいいんじゃない。片方のモードは<strong>ストーリーがなくて純粋にアクションを楽しむ。もう片方はストーリーがあってそれを楽しみつつもアクションを楽しむ</strong>っていうふうにしたらいいんじゃない？いいね。そうしよう。ストーリーは後で考えよう。<br>じゃあ、今考えた要素をまとめよう。<br>左右移動 / ジャンプと二段ジャンプ / 攻撃は10種類 / 広大なマップを探索する / コイン→武器を買って自分の攻撃力とかをグレードアップ / ストーリーなしのアクションを楽しむモード・ストーリーを楽しむモード
+          </p>
+          <p>
+            じゃあ、これを軸に<strong>明日</strong>からゲームを作っていこう！
+          </p>
+          <h2 class="articleScene">~Day2 2025/6/24  -初めての自力コーディング- ~</h2>
+          <p>よし！じゃあ、早速作っていこう。まずはどういう順番で何を作っていくかを決めよう。今最低限プレイヤーに必要なのは、</p>
+          <ul>
+            <li>左右移動</li>
+            <li>ジャンプ</li>
+            <li>二段ジャンプ</li>
+            <li>攻撃</li>
+          </ul>
+         <p><strong>優先順位をつけて整理してみよう！</strong>でも、この順番でいいや。まずは左右移動から作っていこう。とその前に、<strong>PlayerのScene</strong>の方を作っていこう！</p>
+         <p>
+           まずは<strong>CharacterBody3D</strong>を追加していこう！
+         </p>
+         <img alt="CharacterBody3Dを追加している様子" src="../img/Godot-add-player-characterbody3d.jpeg">
+  <h3 class="articleCategory">Godot使うなら絶対に知っておけ！ - CharacterBody3Dってなんだ！</h3>
+  <p>
+    <strong>CharacterBody3D</strong>はプレイヤーキャラクターや敵キャラクターのような<strong>能動的に動く存在を制御するために設計されたNode</strong>です。特に「重力やジャンプ、移動」といったゲームでよくキャラクターが使う動きを簡潔に記述できるように作られているのが特徴です。<br>
+<strong>CharacterBody3D</strong>は、<strong>物理ベースの移動を行うための"Velocity"プロパティ</strong>と、<strong>衝突を考慮しながら移動を処理する"MoveAndSlide()"メソッド</strong>を標準で備えています。これらをうまく活かすことで、<strong>重力や床との滑りなどの基本的なキャラクターの挙動が自然に再現できます。</strong>
+  </p>
+    <p>
+      つまり、CharacterBody3DやRegidBody3D以外の<strong>テキトーなNode</strong>を使って動きをプログラミングするよりもCharacterBody3Dを使う方が<strong>楽に移動、ジャンプを作ることができる且挙動が自然になる</strong>のです。まあ、最初はプレイヤー、敵を作る時に使うのはCharacterBody3Dくらいのノリで覚えておいてください。
+    </p>
+    <img alt="collisionShape3Dを追加している様子" src="../img/Godot-add-collisionshape3D.jpeg">
+
+<p>次にCollisionShape3Dを追加します。</p>
+
+<h3 class="articleCategory">これを知らなきゃ話にならない。CollisionShape3Dって何？</h3>
+  <p><strong>CollisionShape3D</strong>は、<strong>物理演算を行うための形状情報</strong>を与えるためのNodeです。つまり、Godotにおける<strong>「当たり判定の形＝Shape」</strong>を定義するNodeです。<strong>単体では機能せず</strong>、CharacterBody3DやRigidBody3D、Area3Dなどの<strong>物理Nodeの子として使われます。</strong>親Nodeに<strong>"どの範囲に当たり判定を持たせるかを教える"</strong>役目を果たしています。</p>
+<p>これがないと例えば重力を作ったとしても床をすり抜けて落ちていっちゃうとかそういうふうになります。<strong>CharacterBody3DやRigidBody3D、Area3Dとセットで追加する</strong>というふうに思っていればOKです。</p>
+
+<img alt="meshInstance3Dを追加している様子" src="../img/Godot-add-meshInstance3D.jpeg">
+
+<p>最後にMeshInstance3Dを追加していきます。</p>
+
+<h3 class="articleCategory">これをなくしてゲームは成り立たない。MeshInstance3Dとは何者？</h3>
+  <p><strong>MeshInstance3D</strong>は、Godotで<strong>3Dモデルをシーン上に表示するために使うNodeです。</strong></p>
+  <p>わかりやすくいうと、親Nodeに<strong>「視覚的な形状＝メッシュ＝"見た目"」を表示させる</strong>Nodeです。</p>
+  <p>たったこれだけです。ただ単に<strong>見た目</strong>を作るだけ、ただそれだけです。<strong>CharacterBody3DまたはArea3DなどとCollisionShape3DとMeshInstance3Dのこの3セットを追加する</strong>と思っておけばいいと思います。これなら最低限の動きは作れるでしょう。</p>
+
+  <p>さあ、長ったらしい解説はここまでにして、早速<strong>スクリプト</strong>を<strong>アタッチ</strong>していきましょう！</p>
+
+<h3 class="articleCategory">プレイヤーをコーディングだ！</h3>
+<pre><code class="language-csharp">
+using Godot;
+using System;
+
+public partial class player_magic : CharacterBody3D
+{
+    [Export]
+    public float Speed = 5.0f;
+
+    private Vector3 direction = Vector3.Zero;
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionPressed("moveRight"))
+        {
+            direction.X += 1;
+        }
+        if (Input.IsActionPressed("moveLeft"))
+        {
+            direction.X -= 1;
+        }
+
+        Velocity.X = direction.X * Speed;
+
+        MoveAndSlide();
+        direction = Vector3.Zero;
+    }
+}
+</code></pre>
+
+  <p>このコードはチュートリアルを参考にしながら作りました。序盤の基本的な動作とかの導入は結構<strong>チュートリアルが役立つ</strong>と思うので、覚えておくといいでしょう。ではコードの解説に写っていきます。</p>
+
+<h3 class="articleCategory">using</h3>
+<pre><code class="language-csharp">
+using Godot;
+using System;
+</code></pre>
+  <p>GodotでC#を使うとき、<strong>using System</strong>と<strong>using Godot</strong>を最初に書くことで、C#の標準機能やGodotのゲーム開発に必要なクラスを簡単に使えるようになります。Systemは<strong>基本的な操作（リストやファイル操作など）を提供</strong>し、<strong>Godotはゲームに必要なクラス（NodeやVector2など）を提供します。</strong>他にも、特定の機能を使いたいときにusingで追加することができます。</p>
+<p>めちゃくちゃわかりやすくいうと、Systemっていう名前のおもちゃの箱とGodotっていう名前のおもちゃの箱があるとします。using Systemと書くと<strong>Systemの箱の中の"おもちゃ＝コード"を"using=使える"ようになります。</strong>using Godotと書くと、<strong>"Godotの箱の中の"おもちゃ＝コード"</strong>が<strong>"using=使える"</strong>ようになるという感じです。</p>
+
+<h3 class="articleCategory">-変数について-</h3>
+<pre><code class="language-csharp">
+[Export]
+    public float Speed = 5.0f;
+
+    private Vector3 direction = Vector3.Zero;
+</code></pre>
+  <p>[Export]っていうのはその下にある変数を<strong>パラメーター</strong>にする時に使う、いわゆる<strong>呪文とかおまじない</strong>ってやつです。この[Export]と入れることで一回一回コードを書いてエディター上で数字を変えるという作業をしなくても、開発エンジンの<strong>インスペクタ上から自由に数値を変えることができる</strong>ようになります。SpeedやGravity（重力）など、<strong>頻繁に調整することのある変数をパラメーター化しておく</strong>と便利です。</p>
+  <p>次に、<strong>publicとprivate</strong>について説明します。先に言っておきますが、<strong>Godotでゲーム開発をする場合、どちらを使うかを気にする必要はあまりありません。</strong>私はアプリ開発もしているため、感覚を忘れないように意識的に使い分けていますが、Godot内での挙動には特に違いはありません。実際、C#では<strong>private</strong>にした変数は<strong>他のスクリプトがアクセスできなくなり、public</strong>にした変数は<strong>外部からもアクセスできる</strong>という意味があります。しかし、GodotのC#スクリプトでは、publicでもprivateでも、インスペクタからのアクセスに<strong>違いはありません。</strong>そのため、Godotで開発する場合、<strong>publicやprivateは、コードの外部アクセスを意識する場合にだけ使う</strong>くらいで大丈夫です。変数を作ったり、関数使ったりするときにとりあえずつけておくものと思っていてください。</p>
+<p>変数を作る時には次のようにコードを打ちます。</p>
+<pre><code class="language-csharp">
+public [型名] [変数名] = [数値];
+</code></pre>
+  <p>このpublicやprivateの後に来ているのが<strong>型名</strong>です。型名はたくさんありますが、ゲーム開発やアプリ開発でよく使うものをいくつか紹介しましょう。</p>
+<ul>
+    <li><strong>int</strong>：ただの整数。（1,2,3,4,5...）</li>
+    <li><strong>float</strong>：小数点付きの数字。（1.2f,4.1f,99.99f....）</li>
+    <li><strong>string</strong>：文字列（こんにちは、HelloWorld...）</li>
+    <li><strong>character</strong>：1文字（A,B,C,あ,い,う...）</li>
+    <li><strong>bool</strong>：trueかfalseのどちらか</li>
+    <li><strong>Vector2</strong>：2次元の座標（x,y)</li>
+    <li><strong>Vector3</strong>：3次元の座標(x,y,z)</li>
+</ul>
+<p>これらは頭に<strong>絶対に入れておいてください。</strong>C#でやる場合は特に。C#は<strong>オブジェクト指向型のプログラミング言語</strong>なので、変数の作成や変数への代入時にはどの型か指定する必要があります。例えば、numberという変数に8.2を代入する場合、public <strong>float</strong> number = 8.2<strong>f</strong>;というふうに描きます。ここで重要なのは、<strong>数値や変数に型を指定しないとエラーが起きる</strong>という点です。例えば、float型に整数を代入したり、int型に小数点を代入しようとすると、コンパイラが「型が一致しません」とエラーを出して、コードが正常に動作しません。<strong>これを回避するために、適切な型を使うことが大切です。</strong></p>
+<p>public float Speed = 8.0f;</p>
+<pre><code class="language-csharp">
+public float Speed = 8.0f;
+</code></pre>
+
+<h3 class="articleCategory">_PhysicsProcess</h3>
+<pre><code class="language-csharp">
+public override void _PhysicsProcess(double delta)
+{
+   //ここに処理を書く
+}
+</code></pre>
+<p><strong>public override void _PhysicsProcess(double delta)</strong>は、<strong>物理演算用の処理を実行するための関数</strong>です。固定フレーム間隔で処理が実行します。</p>
+  <p>ゲームの実行環境が変わっても一定のフレームレートで動作してくれるので、<strong>物理演算に向いています。</strong></p>
+
+<h3 class="articleCategory">MoveAndSlide()</h3>
+<pre><code>
+MoveAndSlide();
+</code></pre>
+<p><strong>MoveAndSlide()</strong>はゲームエンジンでよく使われる<strong>移動メソッド</strong>です。主にキャラクターの移動やオブジェクトの<strong>移動処理に使われます。</strong>普通に位置を変えるだけでなく、<strong>「滑るような動き」や「壁や床との衝突判定」を自動的に処理してくれる</strong>のが特徴です。</p>
+<p>この関数は<strong>CharacterBody3DとRigidBody3Dだけでのみ使える関数</strong>です。<strong>CharacterBody3DやRigidBody3D</strong>でもキャラクターやオブジェクトの移動の処理をさせるときに<strong>移動処理の後に書くもの</strong>と思っておいてください。</p>
+
+<h3 class="articleCategory">このコードを実行すると...</h3>
+<pre><code>
+public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionPressed("moveRight"))
+        {
+            direction.X += 1;
+        }
+        if (Input.IsActionPressed("moveLeft"))
+        {
+            direction.X -= 1;
+        }
+
+        Velocity.X = direction.X * Speed;
+
+        MoveAndSlide();
+        direction = Vector3.Zero;
+    }
+</code></pre>
+<p>実はこのコードをビルドすると実は以下のようにエラーが出ます。</p>
+<p class="Err">CS1612: 変数ではないため、'CharacterBody3D.Velocity' の戻り値を変更できません /Users/******/GodotProject/BaRont/player_magic.cs(22,3)===>Velocity.X = direction.X * Speed;</p>
+<p>これは構文が間違っているため出たものです。CharacterBody3Dが元々持っているメソッドVelocityに.Xや.Yなどのプロパティをつけることはできないのでエラーが出ました。これはVelocity.X = direction.Xとするのではなく、Velocity = directionとする必要があります。<br>Day2終了時点でこのことには気づいてなかったのでDay3で直しました。</p>  
+ 
+  <h2 class="articleScene">~Day3 2025/6/25 -ゲーム開発は甘くない-~</h2>
+  <p>では、早速昨日言ったところを修正していきましょう！</p>
+  <pre><code class="language-csharp">
+public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionPressed("moveRight"))
+        {
+            direction.X += 1;
+        }
+        if (Input.IsActionPressed("moveLeft"))
+        {
+            direction.X -= 1;
+        }
+
+        Velocity = direction * Speed;
+
+        MoveAndSlide();
+        direction = Vector3.Zero;
+    }
+</code></pre>
+  <p>こうすることで正しく左右に移動します！ってことで前回（Day2）解説していなかったところを解説していきます！</p>
+  <h3  class="articleCategory">Input</h3>
+  <pre><code class="language-cshape">
+Input.IsActionPressed("moveUp")
+</code></pre>
+  <p>Input.IsActionPressed("moveUp") は、プレイヤーが「moveUp」という名前の<strong>入力アクションを押している間、true を返し、押していないときにfalse</strong>を返す関数です。<br>moveUpはインプットマップと呼ばれる操作方法の設定の画面で決めることができます。後ほど説明します。</p>
+  <h3 class="articleCategory">正しいコードの仕組み</h3>
+  <p>このコードではどのようにしてキャラクターを動かしているかを解説します。</p>
+  <p><strong>1.</strong> public override void _PhysicsProcess(double delta)でマイフレーム描画するように指定します。
+    <br><strong>2.</strong> if(Input.IsAvtionPressed("move ****")でmove****を検知します。
+    <br><strong>3.</strong> 検知したらdirection（=方向）に1を増やしてdirection=(1,0,0)にします。
+    <br><strong>4.</strong> VelocityにdirectionにSpeedをかけた数字を代入します。
+    <br><strong>5.</strong> MoveAndSlide()でオブジェクトを動かすということです。
+</p>
+  <p>ここまでだけで動きそうですが、このあとが重要です。
+    <br><strong>6.</strong> 最後にdirectionをリセットすることでボタンを押したら永久に動き続けることを防止します。</p>
+  <p>この6.がないと、directionは1となり、<strong>リセットされないため、永遠と動き続けることになります。</strong>まあ、ここでこのあと始まるジャンプの実装時に起こる問題の原因となるのですがね。この時は知らないので。</p>
+  <h3 class="articleCategory">全ての始まり、重力</h3>
+  <p>じゃあ、左右移動の次はジャンプの仕様を作っていきます。ジャンプは重力という要素が必須なので、まずば重力から作っていきましょう。</p>
+<pre><code class="language-cshape">
+using Godot;
+using System;
+using System.Globalization;
+
+public partial class player_magic : CharacterBody3D
+{
+    [Export]
+    public float Speed = 1.0f;
+    [Export]
+    public float Grabity = 1.0f;
+
+    private Vector3 direction = Vector3.Zero;
+
+    public override void _PhysicsProcess(double delta)
+    {
+
+       //省略
+
+        if (IsOnFloor() == false)
+        {
+            direction.Y -= Grabity;
+        }
+        else if (IsOnFloor() == true)
+        {
+            direction.Y = 0;
+        }
+
+        Velocity = direction * Speed;
+        GD.Print(Velocity);
+        MoveAndSlide();
+        direction = Vector3.Zero;
+    }
+}
+</code></pre>
+  <p>1発でエラーとかバグが起こらずに完成できました。ではコードの解説の方に移ります。</p>
+  <pre><code class="language-cshape">
+ [Export]
+    public float Grabity = 1.0f;
+</code></pre>
+  <p>ここでGrabityを宣言しつつ、パラメーター化しています。結構作っている途中で変えたくなるのでね。</p>
+<br>
+  <pre><code class="language-cshape">
+        if (IsOnFloor() == false)
+        {
+            direction.Y -= Grabity;
+        }
+        else if (IsOnFloor() == true)
+        {
+            direction.Y = 0;
+        }
+</code></pre>
+  <p>ここで重力の処理を行っています。<strong>IsOnFloor()</strong>という関数を使って<strong>床に触れているかを検知</strong>し、触れていなかったら、directionのYをGrabityずつ減らしていき、落下。触れている時はdirectionを0にして落下しないようにするという感じです。</p>
+  <pre><code class="language-cshape">
+        MoveAndSlide();
+</code></pre>
+  <p>最後にMoveAndSlide()でdirectionを動きに反映して重力の処理をするという感じです。</p>
+  
+  <h3 class="articleCategory">地獄のジャンプ実装</h3>
+  <p>重力もできたので、早速ジャンプの方作っていきましょう！</p>
+  <br>
+  <p>まずはジャンプ力っていうかジャンプ時の上昇量を決めましょう。おそらくこの変数は<strong>頻繁に変えることになる</strong>ので、<strong>[Export]でパラメーター化しちゃいましょう！</strong></p>
+  <pre><code class="language-cshape">
+[Export]
+public float JumpPower = 1.0f;
+</code></pre>
+  <p>パラメーターにする数字は<strong>初期値を入れるかテキトーな数字を入れる</strong>とかしておいてください。私は初期値を入れました。</p>
+  <p>では次に、ジャンプをする仕組みを作っていきましょう。</p>
+  <p>一回ジャンプがどのようにされているか整理してみましょう。</p>
+  <p>
+    <br><strong>1.</strong> ジャンプするボタンを押した時に上方向への力を加える
+    <br><strong>2.</strong> 下方向への力は加え続ける
+<br>
+<br>基本的にこれだけで自なジャンプはできます。
+</p>
+  <img alt="ジャンプの軌道の様子" src="../img/Art-jump-player.png">
+  <p>では早速これをコードにしていきましょう。</p>
+  <pre><code class="language-cshape">
+if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
+{
+    direction.Y = JumpPower;
+}
+</code></pre>
+  <p>このコードを説明すると、地面に触れている<strong>且つ</strong>ジャンプボタンが押されたら、direction.YをJumpPowerにするというものです。&&が且つという意味で、<strong>左右にある関数がどちらもtrueを返したら、trueを返します。</strong>（なんか小泉構文みたいですね。）また、<strong>少なくとも一方がfalseだったら、falseになります。</strong>これらを論理演算子と言うのですが別の記事でじっくりと説明しようと思いますので出てきたら簡単な説明をすると言うふうにしようと思います。</p>
+  <br><p>ではこれで動かしてみましょう。<br>
+あれ？おかしいですね。ジャンプしてくれません。
+では、原因究明のためにdirectionがどうなっているかみてみましょう。コードの一番最後で</p>
+  <pre><code class="language-cshape">
+GD.Print(direction.Y);
+</code></pre>
+  <p>これを入れることでコンソールにdirectionのYの数字を見ることができます。この状態でビルドするどうなるでしょう。</p>
+<img alt="全ての数字が0の様子" src="../img/Godot-build-Console0.jpeg">
+  <p>全部0ですね。ここから推測するに、おそらく、コードの1番最後のこのコードが邪魔をしているのではないでしょうか。</p>
+  <pre><code class="language-cshape">
+direction=Vector3.Zero;
+</code></pre>
+  <p>このコードはマイフレーム、<strong>directionを0にしています。</strong>つまり、自分の想定では上方向への力JumpPower分の力が入り上へ飛んでいくのですが、<strong>directionがすぐに0になるため、上へ押す力がリセットされてしまう</strong>と推測されます。では次回、最後のコードを消してみようと思います。</p>
+  
+  
+  
+  
+<h2 class="articleScene">~ 締め~</h2>
+<p>今回はゲームの方向性を決めた後、左右移動の仕組みを作りました。&#x2028;ただ、このコードには誤りがあったため、明日（Day3）で修正します。
+本当はDay2〜Day7までをまとめて1記事にする予定でしたが、想定以上に解説が長くなってしまったので、今回はDay2とDay3
+  だけの記事としてお届けします。<br>
+次回はジャンプや二段ジャンプの実装にチャレンジするので、どうぞお楽しみに！<br>
+それでは、バイバイ！
+</p>
+  
+
+
+          
+        </article>
+        <aside>
+            <div class="asideBox">
+                <div class="Information">
+                    <img class="profile-img" src="../img/IMG_4746.jpeg" alt="プロフィール画像">
+                    <p class="category">RockHopperPenguin64</p>
+                </div>
+                <p>
+                    Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。<br>
+                    たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。<br>
+                    このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+                </p>
+            </div>
+            <div class="asideBox">
+                <p class="asideTitle">現在進行中のプロジェクト</p>
+                <!-- 現在の作業状況セクション（コメントアウト） -->
+                <!--
+                <div class="asideSection" id="current-status">
+                    <p class="asideCategory">現在の作業状況</p>
+                    <p id="task"></p>
+                    <p id="task-details"></p>
+                </div>
+                -->
+                <!-- 進行中のプロジェクトセクション -->
+                <div class="asideSection" id="project">
+                    <p class="asideCategory">進行中のプロジェクト</p>
+                    <p id="project-name"></p>
+                    <p id="project-description"></p>
+                    <p id="project-progress"></p>
+                </div>
+                <!-- 共通データファイルを読み込む -->
+                <script src="../JavaScript/data.js"></script>
+                <!-- プロジェクトデータを反映するスクリプト -->
+                <script>
+                    // プロジェクトデータの表示
+                    document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+                    document.getElementById("project-description").textContent = "説明: " + project.description;
+                    document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+                </script>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+        <p class="Japanese">
+            <a href="../index.html">ホーム</a>|
+            <a href="../about.html">ブログの紹介</a>|
+            <a href="../dev-note.html">デバックノート</a>|
+            <a href="../memo.html">私のメモ</a>
+        </p>
+        <p>
+            <a href="https://github.com/RockHopperPenguin64" alt="GitHubのロゴ">
+                <img class="github" alt="Githubのロゴ" src="../img/github.svg" alt="GitHub">
+            </a>
+        </p>
+    </footer>
+</body>
+</html>
