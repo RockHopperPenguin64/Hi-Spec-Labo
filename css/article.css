@@ -4,13 +4,13 @@ section{
   font-family: "Klee One", sans-serif
 }
 
-.articleCategory{
+h3 .articleCategory{
   border-bottom: solid 0.1em  #e83929;
   display: inline;
 }
 
 
-.articleScene {
+h2 .articleScene {
   font-size: 1.8em;
   font-weight: bold;
   color: #333;
