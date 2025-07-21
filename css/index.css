@@ -153,7 +153,7 @@ main {
 /* カードの画像 */
 .card-img {
   width: 30vw;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1684 / 1190;
   height: 100%;
   margin: 1em 0.3em 1em 0;
 }
