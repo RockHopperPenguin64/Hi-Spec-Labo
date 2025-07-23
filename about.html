@@ -26,6 +26,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/aside.css">
 
     <!-- 他のhead系統のコードは後ほど追加 -->
 </head>
@@ -113,6 +114,47 @@
     </p>
   </div>
 </section>
+            <aside>
+            <div class="asideBox">
+                <div class="Information">
+                    <img class="profile-img" src="../img/IMG_4746.jpeg" alt="プロフィール画像">
+                    <p class="category">RockHopperPenguin64</p>
+                </div>
+                <p>
+                    Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。<br>
+                    たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。<br>
+                    このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+                </p>
+            </div>
+            <div class="asideBox">
+                <p class="asideTitle">現在進行中のプロジェクト</p>
+                <!-- 現在の作業状況セクション（コメントアウト） -->
+                <!--
+                <div class="asideSection" id="current-status">
+                    <p class="asideCategory">現在の作業状況</p>
+                    <p id="task"></p>
+                    <p id="task-details"></p>
+                </div>
+                -->
+                <!-- 進行中のプロジェクトセクション -->
+                <div class="asideSection" id="project">
+                    <p class="asideCategory">進行中のプロジェクト</p>
+                    <p id="project-name"></p>
+                    <p id="project-description"></p>
+                    <p id="project-progress"></p>
+                </div>
+                <!-- 共通データファイルを読み込む -->
+                <script src="JavaScript/data.js"></script>
+                <!-- プロジェクトデータを反映するスクリプト -->
+                <script>
+                    // プロジェクトデータの表示
+                    document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+                    document.getElementById("project-description").textContent = "説明: " + project.description;
+                    document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+                </script>
+            </div>
+        </aside>
+
 
         </main>
         <footer>
