@@ -143,7 +143,7 @@ direction = Vector3.Zero;
     <pre><code class="language-cshape">
 Velocity.X = 0;
     </code></pre>
-    <img alt="エラーが出ている" src="img/Godot-met-errors-2.jpeg">
+    <img alt="エラーが出ている" src="Godot-aaa.jpg">
     <div class="Godot">
       <img class="Godot-img" src="../img/Godot-Logo.svg">
       <p class="Godot-text">
@@ -162,7 +162,8 @@ Velocity.X = 0;
     <pre><code class="language-cshape">
 direction = Vector3.Zero;
     </code></pre>
-    <img alt="ジャンプしてくれない" src="img/Godot-player-dontJump.jpeg">
+
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-no-jump.mp4/"></video>
     <div class="Godot">
       <img class="Godot-img" alt="Godotのロゴ" src="../img/Godot-Logo.svg">
       <p class="Godot-text">
@@ -181,7 +182,7 @@ direction = Vector3.Zero;
     <pre><code class="language-cshape">
 direction.X = 0;
     </code></pre>
-    <img alt="ジャンプしてくれた"　alt="Godotのロゴ" src="img/Godot-player-jump">
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-can-jump.mp4/"></video>
     <p>
       OK！無事ジャンプしてくれました。
       <br>じゃあ、次はジャンプの挙動が今は一気に上がってゆっくり落ちるっていう挙動なので、放物線を描くような挙動にしていこうと思います。
@@ -192,7 +193,6 @@ direction.X = 0;
     <p>
       じゃあまずはJumpPowerを挙げてみましょう。
     </p>
-    <img alt="JumpPowerのパラメーターを大きくしている様子" src="img/Godot-player-parameter-jumpPower.jpeg">
     <p>
       ダメですね。1フレームでめっちゃ高く上がっただけですね。
     </p>
@@ -202,7 +202,6 @@ direction.X = 0;
     <p>
       じゃあ重力を弱くしてみます。
     </p>
-    <img alt="重力のパラメーターを弱くしている様子" src="img/Godot-player-parameter-Gravity.jpeg">
     <p>
       ダメですね...。上に上がったあとゆっくりと下がるだけですね。
       <br>じゃあ復習がてら一回ジャンプの仕組みを整理してみましょう。
@@ -211,7 +210,7 @@ direction.X = 0;
   <details>
      <summary>問題！ジャンプの仕組みはどのようなふうになっていたでしょう？</summary>
         <div class="content">
-         <img alt="ジャンプの軌道の様子" src="../img/Art-Jump.jpeg"> 
+         <img alt="ジャンプの軌道の様子" src="../img/Art-jump-player,png"> 
          <p>
            上方向に力を加えた後、その力から下への力だけ小さくし続ける。
            <br>（これに似た表現または内容になっていれば正解）
@@ -286,12 +285,11 @@ if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
 <p>
   雑談です。スクラッチって神ですね。昨日（Day4）で作ったジャンプのコードあるじゃないですか。それのコードの元になったのはスクラッチのコードなんですよ。自分の記憶にあったスクラッチでジャンプを作る方法を元にジャンプのコードを作りました。やっぱりスクラッチってアニメーションとか3Dがやりにくいだけでかなり自由にできるんだなって感じました。噂だとスクラッチで物理エンジンを作った人がいるとか聞いたことありますし。やっぱりすごいですよね。
 </p>
-<img alt="スクラッチキャットが神" src="img/Art-scratch-cat-god.jpg">
 <p>
   話を戻します。プレイヤーが何をするか決定したら、設定はそこから広げてけばいいです。私の場合だと大会についてとか。
 <br>決めたことが<strong>「どういう名前で」「なんのために」「どのように」</strong>行われてるまたは使うかというものを詳しくしていきましょう。英語の<strong>5W1Hです</strong>ね。それぞれに該当する質問を<strong>少なくとも1つは考えてそれに答えれば設定はより深く面白くなります。</strong>
 </p>
-<img alt="5W1Hのイラスト" src="Art-5w1h.png">
+<img alt="5W1Hのイラスト" src="Art-5W1H.jpeg">
 <p>
   例えばわたしの例だとこのようです。
 </p>
@@ -363,7 +361,7 @@ if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
   <p>
     これだけで二段ジャンプできるようになります。本当ですよ！実際にやってみせましょうか？
   </p>
-  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="../video/Godot-2jump-video.mp4/"></video>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-jumpup.mp4/"></video>
   <p>
     大成功ですね！
     <br>二段ジャンプも上手く行ったことだし、明日は攻撃の方を作ろうと思います。
