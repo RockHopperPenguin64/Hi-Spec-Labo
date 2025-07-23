@@ -54,7 +54,7 @@ h2, .articleScene {
 }
 
 /* 新版 */
-article img  article section img, video{
+article img,  article section img, video{
   width: 100%;
   max-width: 100%;
   height: auto;
