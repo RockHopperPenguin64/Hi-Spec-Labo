@@ -23,11 +23,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
     
     <!-- ファビコン -->
-    <link rel="icon" href="../img/favicon.jpeg" type="jpeg">
+    <link rel="icon" href="../../img/favicon.jpeg" type="jpeg">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/article.css">
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../../css/article.css">
+        <link rel="stylesheet" href="../../css/aside.css">
+    <link rel="stylesheet" href="../../css/global.css">
+
+           <!-- Highlight.js 本体 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- C#用の言語パック（任意だけど推奨） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
 
     <!-- 他のhead系統のコードは後ほど追加 -->
 </head>
@@ -37,10 +44,10 @@
                 <span class="title-new-N">N</span><span class="title-new-E">E</span><span class="title-new-W">W</span><span class="title-new-B">!!</span> <span class="Japanese title-enjoy">ハイスペラボ</span>
             </h4>
             <ul class="header-menu">
-                <li class="header-menu-items"><a class="Japanese" href="../all-article.html">記事</a></li>
-                <li class="header-menu-items"><a class="Japanese" href="../about.html">このサイトについて</a></li>
-                <li class="header-menu-items"><a class="Japanese" href="../dev-note.html">デバックノート</a></li>
-                <li class="header-menu-items"><a class="Japanese" href="../memo.html">付箋</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../all-article.html">記事</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../about.html">このサイトについて</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../dev-note.html">デバックノート</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../memo.html">付箋</a></li>
             </ul>
           </a>
         </header>  
@@ -48,7 +55,9 @@
 
 <article>
 <h1>ジャンプせよ！ - Godotのチュートリアル未完走でゲームを作ってみた話　Part2</h1>
-    <img alt="アイタッチ" src="../img/EyeTouch4.PNG">
+    <img alt="アイタッチ" src="../../img/EyeTouch4.PNG">
+<h2>現在、最終修正中です。レイアウトが崩壊している可能性がありますが、ご了承ください。</h2>
+    <p>/<br>/<br>/<br>/<br>/<br>/<br>/<br>/<br></p>
   <p>
     みなさん！こんにちは！最近はブログのサムネや記事の途中で出てくる説明のための画像に、自分で描いたイラストを使っています。ゲーム制作を始めてから絵が上手くなった気がします。ブログの方ですが、SEO対策を強化しました。これでより検索上位に出やすくなったのではないでしょうか。2025/07/09の段階では「Godotのチュートリアル」と検索すると6ページ目の上から3番目に出るようになりました。今後もSEOとかOGPとか頑張っていきますので、よろしくお願いします。
   </p>
@@ -147,7 +156,7 @@ Velocity.X = 0;
     </code></pre>
     <img alt="エラーが出ている" src="Godot-aaa.jpg">
     <div class="Godot">
-      <img class="Godot-img" src="Godot-Logo.png">
+      <img class="Godot-img" src="Godot-logo.png">
       <p class="Godot-text">
         構文エラー
       </p>
@@ -165,9 +174,9 @@ Velocity.X = 0;
 direction = Vector3.Zero;
     </code></pre>
 
-  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-no-jump.mp4/"></video>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-no-jump.mp4"></video>
     <div class="Godot">
-      <img class="Godot-img" alt="Godotのロゴ" src="../img/Godot-Logo.svg">
+      <img class="Godot-img" alt="Godotのロゴ" src="Godot-logo.png">
       <p class="Godot-text">
         無駄だぜ！
       </p>
@@ -184,7 +193,7 @@ direction = Vector3.Zero;
     <pre><code class="language-cshape">
 direction.X = 0;
     </code></pre>
-  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-can-jump.mp4/"></video>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-jumpup.mp4"></video>
     <p>
       OK！無事ジャンプしてくれました。
       <br>じゃあ、次はジャンプの挙動が今は一気に上がってゆっくり落ちるっていう挙動なので、放物線を描くような挙動にしていこうと思います。
@@ -212,7 +221,7 @@ direction.X = 0;
   <details>
      <summary>問題！ジャンプの仕組みはどのようなふうになっていたでしょう？</summary>
         <div class="content">
-         <img alt="ジャンプの軌道の様子" src="../img/Art-jump-player.png"> 
+         <img alt="ジャンプの軌道の様子" src="../../img/Art-jump-player.png"> 
          <p>
            上方向に力を加えた後、その力から下への力だけ小さくし続ける。
            <br>（これに似た表現または内容になっていれば正解）
@@ -258,7 +267,6 @@ if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
     <p>
       なぜこうすることで正しく動くかを解説します。みなさんご存知だと思いますが、プログラムには実行する順番というものがあります。コードの上の方から順に下にいくように実行していきます。つまり、先ほど修正したコードのように<strong>順番を入れ替えることで、挙動を変えることができます</strong>。先ほどのコードだと、先に重力を計算することで、ジャンプとして上への力を入れた時に重力の力ですぐに打ち消されるという現象が起こらなくなります。なので、放物線を描くようにジャンプができるようになります。
     </p>
-    <img alt="プレイヤーが放物線を描きながらジャンプしている様子" src="Godot-player-jump-complete.jpeg">
     <p>
       無事にジャンプを実装できました。ジャンプを実装するにあたってですが、ジャンプだけでここまで手こずるとは思ってませんでした。チュートリアルをやるって大事なことだと実感しました。私のように早く開発をしたいからってチュートリアルを中途半端なままで開発を始めるよりはちょっと我慢してチュートリアルをやったほうがいいと思います。私はそのちょっとの我慢ができなかったわけですがね（笑）
     </p>
@@ -283,7 +291,7 @@ if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
   <br>
   <br>じゃあ、私のゲームでは<strong>『主人公は貧乏人でお金がない。さらに"食べたいもの"があるけど"お金がない"』</strong>というふうにします。
 </p>
-<img alt="主人公は貧乏でお金と食べたもの（ハンバーガーあたり）を思い浮かべている様子" src="Art-want-eat-humbergar.jpeg">
+<img alt="主人公は貧乏でお金と食べたもの（ハンバーガーあたり）を思い浮かべている様子" src="Art-want-eat-humbergar.jpg">
 <p>
   雑談です。スクラッチって神ですね。昨日（Day4）で作ったジャンプのコードあるじゃないですか。それのコードの元になったのはスクラッチのコードなんですよ。自分の記憶にあったスクラッチでジャンプを作る方法を元にジャンプのコードを作りました。やっぱりスクラッチってアニメーションとか3Dがやりにくいだけでかなり自由にできるんだなって感じました。噂だとスクラッチで物理エンジンを作った人がいるとか聞いたことありますし。やっぱりすごいですよね。
 </p>
@@ -328,7 +336,7 @@ private int _jumpLimit = 2;
 <p>
   今回作るのは二段ジャンプなのでジャンプ回数の制限は2回です。
 </p>
-<h3>_jumpLimitの"_"ってなんだ！<h3>
+<h3>_jumpLimitの"_"ってなんだ！</h3>h3>
   <p>
     今作った変数の名前に "_（アンダーバー）"をつけているのには歴とした理由があるので、解説しようと思います。
     <br>C#やGodot C#では、**クラスの中で使われる<strong>「private（外からアクセスできない）変数」には"_"をつけるスタイルがよく使われます。</strong>これは<strong>「この変数は内部用ですよ」</strong>という意味です。
@@ -363,7 +371,8 @@ if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
   <p>
     これだけで二段ジャンプできるようになります。本当ですよ！実際にやってみせましょうか？
   </p>
-  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-jumpup.mp4"></video>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-can-jump.mp4"></video>
+
   <p>
     大成功ですね！
     <br>二段ジャンプも上手く行ったことだし、明日は攻撃の方を作ろうと思います。
@@ -389,7 +398,7 @@ if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
   <aside>
   <div class="asideBox">
     <div class="Information">
-      <img class="profile-img" src="../img/IMG_4746.jpeg" />
+      <img class="profile-img" src="../../img/IMG_4746.jpeg" />
       <p class="category">RockHopperPenguin64</p>
     </div>
     <p>
@@ -423,8 +432,8 @@ if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
         </main>
         <footer>
             <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
-            <p class="Japanese"><a href="../index.html">ホーム</a>|<a href="../about.html">ブログの紹介</a>|<a href="../dev-note.html">デバックノート</a>|<a href="../memo.html">私の付箋</a></p>
-            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../img/github.svg"></a></p>
+            <p class="Japanese"><a href="../../index.html">ホーム</a>|<a href="../../about.html">ブログの紹介</a>|<a href="../../dev-note.html">デバックノート</a>|<a href="../../memo.html">私の付箋</a></p>
+            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../../img/github.svg"></a></p>
         </footer>
     </body>
 </html>
