@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <!-- タイトル -->
+    <title>ブログを放置してたらクリック数が伸びてた件 - Godotのチュートリアル未完走でゲームを作ってみた話 - 番外編 | New!! ハイスペラボ</title>
+    
+    <!-- meta設定 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="ブログを放置してたらクリック数が伸びてた件 - Godotのチュートリアル未完走でゲームを作ってみた話 - 番外編①|New!! ハイスペラボ">
+    <meta property="og:description" content="3ヶ月放置してたブログが、まさかの伸びてた!? 放置の裏でハマってた「戦略ゲーム」と「AI開発」の話。そして、ブログ復活宣言も！">
+    <meta property="og:image" content="SamuneMicanGodotChallengeExtra1.png">
+    <meta property="og:url" content="https://github.io/RockHopperPenguin64/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="../img/favicon.jpeg" type="jpeg">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="../css/global.css">
+
+    <!-- 他のhead系統のコードは後ほど追加 -->
+</head>
+<body>
+        <header><a href="https://rockhopperpenguin64.github.io/Hi-Spec-Labo/">
+            <h4 class="title">
+                <span class="title-new-N">N</span><span class="title-new-E">E</span><span class="title-new-W">W</span><span class="title-new-B">!!</span> <span class="Japanese title-enjoy">ハイスペラボ</span>
+            </h4>
+            <ul class="header-menu">
+                <li class="header-menu-items"><a class="Japanese" href="../all-article.html">記事</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../about.html">このサイトについて</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../dev-note.html">デバックノート</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../memo.html">付箋</a></li>
+            </ul>
+          </a>
+        </header>  
+  <main>
+
+<article>
+    <section>
+        <h1>放置してたら伸びてた件 - Godotのチュートリアル未完走でゲームを作ってみた話 - 番外編①</h1>
+
+<img alt="サムネ" src="SamuneMicanGodotChallengeExtra1.png">
+
+<p>どうも、お久しぶりです。</p>
+<p>このブログ、実は3ヶ月ほど放置してました。トップページを見ればわかると思いますが、2025/7/23のPart2を最後に、更新が完全に止まっていました。</p>
+<p>「もう誰も見てないだろうな〜」と思っていたのですが、<strong>Google Search Consoleを見たら、なんと直近28日でクリック3回・表示127回。</strong></p>
+
+<img alt="2025/11/10のGSCの画像" src="GSC1.jpeg">
+
+<p>さらに11月8日（土）には表示回数が急に35まで跳ね上がるという事態。</p>
+
+<img alt="2025/11/10のGSCの土曜日の写真" src="GSC2.jpeg">
+
+<p>これはもう、再開するしかないっしょ。ってことで昨日、久々に記事を書いて出しました。</p>
+
+<h2>なぜ放置したか</h2>
+<p>開発日誌系ブログのあるあるだと思うのですが、<strong>ゲーム制作とブログ更新の両立って本当にキツい</strong>です。</p>
+<p>1本の記事の下書きに<strong>1週間近く</strong>、それをHTML化してOGPを整えるのにさらに<strong>1週間</strong>。  
+その間もゲーム開発を進めるので、当然<strong>時間がカツカツ</strong>になって…結果、更新が止まってしまいました。</p>
+
+<h2>放置してた間にやってたこと</h2>
+<p>多分このブログを読んでくれてて、たまに見に来てくれてる人（ほんとありがとう）は気になると思うのですが、放置してた間に何してたのかを正直に話します。</p>
+<p>ざっくり言うと、以下の2つです。</p>
+
+<ul>
+  <li>Call of War</li>
+  <li>AI開発</li>
+</ul>
+
+<h3>Call of Warにハマってた話</h3>
+
+<p><strong>Call of War</strong>は、第二次世界大戦を舞台にしたリアルタイム戦略ゲームで、プレイヤーが国家の指導者になって軍事・外交・経済を駆使して世界征服を目指すオンラインゲームです。</p>
+
+<p>ドイツのゲーム会社<strong>Bytro Labs</strong>が開発していて、PC・スマホ両方対応。</p>
+
+<img alt="Bytro Labs Logo" src="article/mikanGodotChallengeExtra1/IMG_6314.png">
+
+<p>7月末〜8月下旬くらいまでガッツリやってました。<br>
+戦略を練って攻めるのがほんと楽しくて、当時の私にはドンピシャのゲームでした。</p>
+
+<p>ただ、やってるうちに<strong>毎回の流れが固定化してきて</strong>、研究→兵器アンロック→生産→放置…みたいなループになってきて、そこらへんで飽きた感じですね。</p>
+
+<p>とはいえ、めちゃくちゃ奥が深いゲームです。陸海空バランスとか、外交戦略とか、考えること多くて飽きさせない要素も多い。</p>
+
+<p>外交は主に停戦交渉とかチャットでのやり取り。序盤は不可侵条約とか同盟の呼びかけに使うけど、中盤以降はガン無視で攻めてくるプレイヤーも多いです（笑）</p>
+
+<p>そんな感じのゲームを、1ヶ月ほどガッツリやってました。</p>
+
+<h3>AI開発に手を出した話</h3>
+
+<img alt="chatgpt logo" src="../../img/chatGPT.PNG">
+
+<p>9月に入ってからは、<strong>AI開発</strong>の方にハマってました。  
+Call of Warをやりすぎて飽きたあと、興味が湧いた分野ですね。</p>
+
+<p>AI（人工知能）って簡単に言うと、人間の知的な働きをコンピューターで再現しようとする技術のことで、
+学習・推論・判断みたいな能力を持たせて、<strong>機械が自分で考えて動く</strong>感じですね。</p>
+
+<p>有名どころだとChatGPTですね。</p>
+
+<p>で、ChatGPTを使いまくってて思ったのがこれ。</p>
+
+<p><strong>「ChatGPTはすぐに過去のこと忘れるな」</strong></p>
+
+<p>最近のGPTは進化してて多少は前の会話を覚えてるんだけど、一定量を超えるとすぐ忘れてしまうのですよ。  
+「じゃあ記憶を持たせたらどうなるんだ？」と思って始めたのが、<strong>MemoryAIプロジェクト</strong>です。</p>
+
+<p><a href="#">→ 1ヶ月かけて開発してたMemoryAIプロジェクトはこちら</a></p>
+
+<p>今はゲーム制作再開のため一旦ストップ中ですが、またいつか再開したいと思ってます。</p>
+
+<h2>締め</h2>
+
+<p>というわけで、<strong>別のゲームにハマってた</strong>＋<strong>AI開発に熱中してた</strong>＋<strong>単純に記事書くのが大変だった</strong>という三重苦で、3ヶ月放置してました。すみません🙏</p>
+
+<p>でもこの記事から、ブログは<strong class="veryStrong">復活</strong>します。<br>
+これから半年は継続して更新していく予定です。</p>
+
+<p>また気軽に覗きに来てください！  
+来週〜再来週にはDay7以降の開発記事も出すので、お楽しみに！</p>
+
+
+
+  </section>
+</article>
+  <aside>
+  <div class="asideBox">
+    <div class="Information">
+      <img class="profile-img" src="../img/IMG_4746.jpeg" />
+      <p class="category">RockHopperPenguin64</p>
+    </div>
+    <p>
+      Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
+      たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
+      このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+    </p>
+  </div>
+
+  <div class="asideBox">
+    <p class="asideTitle">現在進行中のプロジェクト</p>
+
+    <div class="asideSection" id="project">
+      <p class="asideCategory">進行中のプロジェクト</p>
+      <p id="project-name"></p>
+      <p id="project-description"></p>
+      <p id="project-progress"></p>
+    </div>
+
+    <script src="../JavaScript/data.js"></script>
+    <script>
+      // プロジェクトデータの表示
+      document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+      document.getElementById("project-description").textContent = "説明: " + project.description;
+      document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+    </script>
+  </div>
+</aside>
+
+          
+        </main>
+        <footer>
+            <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+            <p class="Japanese"><a href="../index.html">ホーム</a>|<a href="../about.html">ブログの紹介</a>|<a href="../dev-note.html">デバックノート</a>|<a href="../memo.html">私の付箋</a></p>
+            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../img/github.svg"></a></p>
+        </footer>
+    </body>
+</html>
