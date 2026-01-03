@@ -1,3 +1,50 @@
+.np-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 3rem 0;
+}
+
+.np-card {
+  display: block;
+  font-family: "Quicksand", sans-serif;
+  padding: 1.2rem 1.4rem;
+  border: 0.1em solid #ddd;
+  border-radius: 0.5em;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.np-card:hover {
+  border-color: #666;
+  transform: translateY(-2px);
+}
+
+.np-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.np-title {
+  font-size: 1rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* 方向ごとの微調整 */
+.np-prev {
+  text-align: left;
+}
+
+.np-next {
+  text-align: right;
+}
 
 .Godot {
   display: flex;
