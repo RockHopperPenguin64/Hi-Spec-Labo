@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <!-- タイトル -->
+    <title>ジャンプせよ！【2段ジャンプ】- Godotのチュートリアル未完走でゲームを作ってみた話 Part2【Godot C#】【ストーリー設計】 | New!! ハイスペラボ</title>
+    
+    <!-- meta設定 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="C#でジャンプせよ！|Godotのチュートリアル未完走でゲームを作ってみた話 Part2|New!! ハイスペラボ">
+    <meta property="og:description" content="Godotエンジンのチュートリアルを完走せず、独自にゲーム開発に挑戦した作者の奮闘記。ジャンプや二段ジャンプの挙動改善では、コード順序の大切さや条件分岐の工夫に注目し、初心者目線のトライ＆エラーが満載。ストーリー設計では、プレイヤーの動機と感情移入を軸に、王道にとらわれない世界観づくりに踏み込む。Scratchベースの開発哲学も登場し、初めてのゲーム制作に挑戦する人にも刺さる内容です。技術・ストーリー・工夫の三拍子が揃った第2弾！
+">
+    <meta property="og:image" content="https://example.com/og-image.jpg">
+    <meta property="og:url" content="https://yourblog.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Klee+One&display=swap" rel="stylesheet">
+    
+    <!-- ファビコン -->
+    <link rel="icon" href="../../img/favicon.jpeg" type="jpeg">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/article.css">
+        <link rel="stylesheet" href="../../css/aside.css">
+    <link rel="stylesheet" href="../../css/global.css">
+
+           <!-- Highlight.js 本体 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- C#用の言語パック（任意だけど推奨） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+
+    <!-- 他のhead系統のコードは後ほど追加 -->
+</head>
+<body>
+        <header><a href="https://rockhopperpenguin64.github.io/Hi-Spec-Labo/">
+            <h4 class="title">
+                <span class="title-new-N">N</span><span class="title-new-E">E</span><span class="title-new-W">W</span><span class="title-new-B">!!</span> <span class="Japanese title-enjoy">ハイスペラボ</span>
+            </h4>
+            <ul class="header-menu">
+                <li class="header-menu-items"><a class="Japanese" href="../../all-article.html">記事</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../about.html">このサイトについて</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../dev-note.html">デバックノート</a></li>
+                <li class="header-menu-items"><a class="Japanese" href="../../memo.html">付箋</a></li>
+            </ul>
+          </a>
+        </header>  
+  <main>
+
+<article>
+<h1>ジャンプせよ！ - Godotのチュートリアル未完走でゲームを作ってみた話　Part2</h1>
+    <img alt="アイタッチ" src="../../img/EyeTouch4.PNG">
+<h2>現在、最終修正中です。レイアウトが崩壊している可能性がありますが、ご了承ください。</h2>
+    <p>/<br>/<br>/<br>/<br>/<br>/<br>/<br>/<br></p>
+  <p>
+    みなさん！こんにちは！最近はブログのサムネや記事の途中で出てくる説明のための画像に、自分で描いたイラストを使っています。ゲーム制作を始めてから絵が上手くなった気がします。ブログの方ですが、SEO対策を強化しました。これでより検索上位に出やすくなったのではないでしょうか。2025/07/09の段階では「Godotのチュートリアル」と検索すると6ページ目の上から3番目に出るようになりました。今後もSEOとかOGPとか頑張っていきますので、よろしくお願いします。
+  </p>
+  <section>
+    <h2>~注意事項~</h2>
+    <p>
+      この記事は、「条件分岐」や「関数」など、プログラミングの基本的な概念を知っていることを前提に書かれています。
+      <br>基礎的な内容にはあまり触れていないため、もしそういった知識がまだない場合は、入門向けの記事を先に読むことをおすすめします。&#x2028;（今はちょっと余裕がなくて書けていませんが、今後は初心者向けの記事も投稿する予定です。お楽しみに！）<br>また、すでにC#をしっかり理解している方にとっては、退屈な内容に感じられるかもしれません。
+      <br>ですが、初心に戻って基本の意味を改めて確認してみるのも、新しい発見につながるかもしれません。
+    </p>
+  </section>
+  <section>
+    <h2>~Day4 2025/6/26 -Jump Up GameCreator-~</h2>
+    <p>
+      はい、じゃあ今日もやっていきましょう。まずは昨日何をやったかを思い出すところから。
+    </p>
+    <pre><code class="language-cshape">
+using Godot;
+using System;
+using System.Globalization;
+
+public partial class player_magic : CharacterBody3D
+{
+    [Export]
+    public float Speed = 1.0f;
+    [Export]
+    public float Grabity = 1.0f;
+    [Export]
+    public float JumpPower = 1.0f;
+
+    private Vector3 direction = Vector3.Zero;
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionPressed("moveRight"))
+        {
+            direction.X += 1;
+        }
+        else
+        {
+            direction.X = 
+        }
+        if (Input.IsActionPressed("moveLeft"))
+        {
+            direction.X -= 1;
+        }
+        else
+        {
+            direction.X = 0;
+        }
+        if (IsOnFloor() == true && Input.IsActionJustPressed("Jump"))
+        {
+            direction.Y = JumpPower;
+        }
+
+        if (IsOnFloor() == false)
+        {
+            direction.Y -= Grabity;
+        }
+        else if (IsOnFloor() == true)
+        {
+            direction.Y = 0;
+        }
+
+        Velocity = direction * Speed;
+        GD.Print(Velocity);
+        MoveAndSlide();
+        direction = Vector3.Zero;
+    }
+}
+</code></pre>
+    <div class="articleBox">
+      <h4 class="boxTitle">前回の切り抜き</h4>
+      <p class="boxSection">
+        このコードはマイフレーム、directionを0にしています。つまり、自分の想定では上方向への力JumpPower分の力が入る、<strong>すぐに0になる</strong>というふうだと思われます。では一回、最後のコードを消してみようと思いま...
+      </p>
+    </div>
+    <p>
+      では、一番下の
+    </p>
+    <pre><code class="language-cshape">
+direction = Vector3.Zero;
+    </code></pre>
+    <p>
+      を消します。どうやって動くでしょうかね。
+      <br>はい、今までみたいにジャンプしないという状況にはなりませんでした。ただ挙動がちょっとおかしくて、上に一気に上がって少しずつ落ちていくというふうになっていますが。そして左右移動をすると永遠と進み続けるやばい挙動ですね。じゃあ、修復していきましょう！
+    </p>
+    
+    
+    <h3>アイデア① -Xだけをリセット-</h3>
+    <p>
+      じゃあ、Xだけをリセットしましょう。
+    </p>
+    <pre><code class="language-cshape">
+Velocity.X = 0;
+    </code></pre>
+    <img alt="エラーが出ている" src="Godot-aaa.jpg">
+    <div class="Godot">
+      <img class="Godot-img" src="Godot-logo.png">
+      <p class="Godot-text">
+        構文エラー
+      </p>
+    </div>
+    <p>
+      ダメみたいですね。
+    </p>
+
+    
+    <h3>アイデア② -directionをリセット-</h3>
+    <p>
+      これならどうだ！
+    </p>
+    <pre><code class="language-cshape">
+direction = Vector3.Zero;
+    </code></pre>
+
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-no-jump.mp4"></video>
+    <div class="Godot">
+      <img class="Godot-img" alt="Godotのロゴ" src="Godot-logo.png">
+      <p class="Godot-text">
+        無駄だぜ！
+      </p>
+    </div>
+    <p>
+      ダメですね。ジャンプしてくれません。
+    </p>
+    
+    
+    <h3>アイデア③ -direction.Xだけリセット-</h3>
+    <p>
+      最終手段だ。これならどうだ！
+    </p>
+    <pre><code class="language-cshape">
+direction.X = 0;
+    </code></pre>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-jumpup.mp4"></video>
+    <p>
+      OK！無事ジャンプしてくれました。
+      <br>じゃあ、次はジャンプの挙動が今は一気に上がってゆっくり落ちるっていう挙動なので、放物線を描くような挙動にしていこうと思います。
+    </p>
+    
+    
+    <h3>アイデア① -JumpPowerアップ！-</h3>
+    <p>
+      じゃあまずはJumpPowerを挙げてみましょう。
+    </p>
+    <p>
+      ダメですね。1フレームでめっちゃ高く上がっただけですね。
+    </p>
+    
+    
+    <h3>アイデア② -重力が強すぎた？-</h3>
+    <p>
+      じゃあ重力を弱くしてみます。
+    </p>
+    <p>
+      ダメですね...。上に上がったあとゆっくりと下がるだけですね。
+      <br>じゃあ復習がてら一回ジャンプの仕組みを整理してみましょう。
+    </p>
+    <div class="accordion">
+  <details>
+     <summary>問題！ジャンプの仕組みはどのようなふうになっていたでしょう？</summary>
+        <div class="content">
+         <img alt="ジャンプの軌道の様子" src="../../img/Art-jump-player.png"> 
+         <p>
+           上方向に力を加えた後、その力から下への力だけ小さくし続ける。
+           <br>（これに似た表現または内容になっていれば正解）
+         </p>
+        </div>
+      </details>
+    </div>
+    <p>
+      現在のジャンプと重力の部分のコードを見てみましょう。
+    </p>
+    <pre><code class="language-cshape">
+        if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
+        {
+            direction.Y = JumpPower;
+        }
+
+        if (IsOnFloor() == false)
+        {
+            direction.Y -= Grabity;
+        }
+        else if (IsOnFloor() == true)
+        {
+            direction.Y = 0;
+        }
+     </code></pre>
+    <p>
+      一見正しく書けているように見えますが、これではダメです。ここでは、ジャンプの入力で direction.Y = JumpPower にした<strong>直後に</strong>、次の重力処理によって</strong>即座に direction.Y を減らしてしまいます。</strong>これにより、ジャンプしたつもりが</strong>その直後のフレームで重力に打ち消される</strong>ため、思ったようにジャンプができない、つまり「ジャンプ直後に急に落ちる」ように見えるのです。正しくはこうする必要があります。
+    </p>
+    <pre><code class="language-cshape">
+  if (IsOnFloor() == false)
+        {
+            direction.Y -= Grabity;
+        }
+        else if (IsOnFloor() == true)
+        {
+            direction.Y = 0;
+        }
+if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
+        {
+            direction.Y = JumpPower;
+        }
+    </code></pre>
+    <p>
+      なぜこうすることで正しく動くかを解説します。みなさんご存知だと思いますが、プログラムには実行する順番というものがあります。コードの上の方から順に下にいくように実行していきます。つまり、先ほど修正したコードのように<strong>順番を入れ替えることで、挙動を変えることができます</strong>。先ほどのコードだと、先に重力を計算することで、ジャンプとして上への力を入れた時に重力の力ですぐに打ち消されるという現象が起こらなくなります。なので、放物線を描くようにジャンプができるようになります。
+    </p>
+    <p>
+      無事にジャンプを実装できました。ジャンプを実装するにあたってですが、ジャンプだけでここまで手こずるとは思ってませんでした。チュートリアルをやるって大事なことだと実感しました。私のように早く開発をしたいからってチュートリアルを中途半端なままで開発を始めるよりはちょっと我慢してチュートリアルをやったほうがいいと思います。私はそのちょっとの我慢ができなかったわけですがね（笑）
+    </p>
+
+    <h2>~Day5 2025/6/27 -スクラッチは神-~</h2>
+    <img alt="スクラッチとスクラッチのGODの文字" src="Art-Scratch-God.jpg">
+    <p>
+      じゃあ、今日は仕様書の方を進めていこうと思います。前仕様書をやったのはDay1の時ですね。じゃあその時何を決めたかちょっと確認してみましょう。
+    </p>
+    <div class="articleBox">
+      <h4 class="articleBoxTitle">前回の記事</h4>
+      <p class="articleBoxSection">
+        左右移動 / ジャンプと二段ジャンプ / 攻撃は10種類 / 広大なマップを探索する / コイン→武器を買って自分の攻撃力とかをグレードアップ / ストーリーなしのアクションを楽しむモード・ストーリーを楽しむモード
+      </p>
+    </div>
+<p>
+  じゃあ今日はストーリーの方を作っていこうと思います。
+  <br>ストーリーで真っ先に考えるべきことがあります。「プレイヤーに何をさせるか」です。ここで<strong>ゲームのストーリーの核ができる</strong>思っても過言ではないです。私はプレイヤーに何をさせるかを中心に物語を考えているので尚更です。
+  <br>まあ王道である「大会に出て優勝する」というふうにしましょうか。こういう横スクロールものの王道ってなんでしょうか。「誘拐されたお姫様を救う」とか「悪を倒す」でしょうか。まあ王道なんて<strong>気にしなくていいですがね。</strong>
+  <br>この後が重要です。<strong>『なぜプレイヤーはそのようなことをするか』</strong>を考える必要があります。ここを考えるときに重要なことは2つあります。<strong>『動機』</strong>と<strong>『感情移入』</strong>です。
+  <br>結論から言いますと、<strong>プレイヤーを困らせる</strong>必要があります。例えば、賞金10億円の格闘があるとします。プレイヤーがもしも大金持ちなら、賞金のことよりも怪我などの<strong>リスクの方へ目がいき</strong>、格闘に自信があるお金持ち以外は<strong>出場しない</strong>でしょう。また、出場しても遊ぶ側は<strong>感情移入しにくい</strong>と思います。しかしプレイヤーがもしも<strong>貧乏人</strong>だったらどうでしょうか。<strong>怪我してでも優勝して賞金をゲットしてやる！</strong>ってなるはずです。こういう方が遊ぶ側は<strong>感情移入しやすい</strong>し、<strong>動機としても十分です。</strong>つまり、<strong>プレイヤーが不利な状況こそがプレイヤーの設計において重要</strong>です。もちろん、例外は<strong>存在します</strong>。例えば<strong>スポーツ</strong>。野球をしている高校のコーチになって大会で優勝を目指すとか、世界一を目指すみたいな設定です。プレイヤーが不利ではなくても大会で優勝という十分な動機があります。そういう<strong>例外に含まれるジャンルのゲーム以外の設計</strong>では、基本的には<strong>プレイヤーが不利な状況になるように設計する</strong>ことをお勧めします。<strong>あなたが遊ぶ側ならどういう状況だったら「動かされる」でしょうか。</strong>
+  <br>
+  <br>じゃあ、私のゲームでは<strong>『主人公は貧乏人でお金がない。さらに"食べたいもの"があるけど"お金がない"』</strong>というふうにします。
+</p>
+<img alt="主人公は貧乏でお金と食べたもの（ハンバーガーあたり）を思い浮かべている様子" src="Art-want-eat-humbergar.jpg">
+<p>
+  雑談です。スクラッチって神ですね。昨日（Day4）で作ったジャンプのコードあるじゃないですか。それのコードの元になったのはスクラッチのコードなんですよ。自分の記憶にあったスクラッチでジャンプを作る方法を元にジャンプのコードを作りました。やっぱりスクラッチってアニメーションとか3Dがやりにくいだけでかなり自由にできるんだなって感じました。噂だとスクラッチで物理エンジンを作った人がいるとか聞いたことありますし。やっぱりすごいですよね。
+</p>
+<p>
+  話を戻します。プレイヤーが何をするか決定したら、設定はそこから広げてけばいいです。私の場合だと大会についてとか。
+<br>決めたことが<strong>「どういう名前で」「なんのために」「どのように」</strong>行われてるまたは使うかというものを詳しくしていきましょう。英語の<strong>5W1Hです</strong>ね。それぞれに該当する質問を<strong>少なくとも1つは考えてそれに答えれば設定はより深く面白くなります。</strong>
+</p>
+<img alt="5W1Hのイラスト" src="Art-5W1H.jpeg">
+<p>
+  例えばわたしの例だとこのようです。
+</p>
+<ul>
+  <li><strong>Who</strong>：誰が大会に参加するか　→  星中の力自慢や大会で優勝したい人</li>
+  <li><strong>Why</strong>：なんのためにその大会をするか　→ 星の中の最強を決める大会。</li>
+  <li><strong>What</strong>：大会では何を競うか　→ 大会では基本的に戦闘での強さを競うが、大会の会場に向かうまでの、探索力・ギミックを攻略力・謎解き力なども必要。</li>
+  <li><strong>When</strong>：いつ、どのくらいの頻度で開催されるか　→ 毎年初夏から年末にかけて長期的に開催される。</li>
+  <li><strong>Where</strong>：どこでその大会が行われるか　→ 各地に大会の予選や決勝などのための会場があり、プレイヤーはそこをマップの中を探索して探す。</li>
+  <li><strong>How</strong>：どのような形式で行われるか　→ トーナメント形式。1つ前のエリアの会場でそこの地区の優勝者に勝ったら次の地区で戦える。</li>
+</ul>
+<p>
+  このような感じで、<strong>5W1Hの各項目に当てはまる質問に答えていく</strong>と、最初の自分の考えた紙のように薄かった設定が、さまざまな設定が重なり束ねられることで<strong>1つの本のように奥行きが生まれてきます。</strong>この質問をより多く作りそれに応えるほど、本のページ数は増えていき、重く分厚くなり、<strong>設定として濃くなっていきます。</strong>詳しい設定ができたら、どのように進むか流れを軽く考えておくといいです。
+  <br>かなり考えることができたので本日はここまでにしておきましょう。
+</p>
+
+
+<h2>~Day6 2025/6/28 -念願の二段ジャンプ-~</h2>
+<p>
+  じゃあ今日は二段ジャンプの方を作ってきましょう。じゃあジャンプの機構を振り返っていきましょう。
+</p>
+<pre><code class="language-cshape">
+if (IsOnFloor() && Input.IsActionJustPressed("Jump"))
+        {
+            direction.Y = JumpPower;
+        }
+</code></pre>
+<p>
+  OK、なんとなくつかめました。まずはジャンプ回数を制限するために専用の変数を作っていきます。
+</p>
+<pre><code class="language-cshape">
+private int _jumpLimit = 2;
+</code></pre>
+<p>
+  今回作るのは二段ジャンプなのでジャンプ回数の制限は2回です。
+</p>
+<h3>_jumpLimitの"_"ってなんだ！</h3>h3>
+  <p>
+    今作った変数の名前に "_（アンダーバー）"をつけているのには歴とした理由があるので、解説しようと思います。
+    <br>C#やGodot C#では、**クラスの中で使われる<strong>「private（外からアクセスできない）変数」には"_"をつけるスタイルがよく使われます。</strong>これは<strong>「この変数は内部用ですよ」</strong>という意味です。
+    <br>よく勘違いされるのですが、_PhysicsProcessや_Readyなどの関数にも"_"がついてますが、定数を意味する"_"とは若干違い、<strong>「Godotが内部的に呼び出す特別な関数」</strong>という意味です。
+  </p>
+  <p>
+    ジャンプ回数を制限する変数が書けたので、条件分岐の方を変えていきます。
+  </p>
+  <pre><code class="language-cshape">
+if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
+  </code></pre>
+  <h3>論理演算子　"||"</h3>
+  <p>
+    タイトルの方で意味は書いてしまいましたが、" || "は<strong>『または』</strong>という意味の論理演算子です。高校数学でよく嫌われているやつですね。この<strong>『または』は少なくともどちらか一方がTrueでTrueと返します。</strong>高校数学だと、『少なくともこのどちらか一方で』っていうのが面倒くさいんですよね。だから<strong>対偶</strong>を考えるんです。数学の話になりますが、命題を全て否定したのが対偶です。例えば、「もし n² が偶数なら、n も偶数である」っていうやつの対偶は全てを否定した 「が奇数ならば、n² も奇数である」というふうですね。全てをひっくり返したものが対偶です。
+    <br>脱線してしまったので話を戻します。<strong>" || "</strong>は<strong>『または』</strong>という意味です。これさえ覚えておけばいいです。
+  </p>
+  <p>
+    これを元に私の書いた条件式を読み解くとこのようになります。
+    <br> if （床の上　<strong>または</strong>　_jumpLimitが0より大きい）且つJumpが押されたら
+    <br>というふうになります。
+  </p>
+  <p>
+    では処理の方を書いていきましょう。
+  </p>
+  <pre><code class="language-cshape">
+if ((IsOnFloor() || _jumpLimit > 0) && Input.IsActionJustPressed("Jump"))
+　　{
+            direction.Y = JumpPower;
+            _jumpLimit -= 1;
+        }
+  </code></pre>
+  <p>
+    これだけで二段ジャンプできるようになります。本当ですよ！実際にやってみせましょうか？
+  </p>
+  <video controlsList="nodownload noremoteplayback" playinline controls webkit-plays inline disablePictureInPicture autoplay muted ><source src="Godot-can-jump.mp4"></video>
+
+  <p>
+    大成功ですね！
+    <br>二段ジャンプも上手く行ったことだし、明日は攻撃の方を作ろうと思います。
+  </p>
+  
+  <h2>~ 締め~</h2>
+  <p>
+    今回はジャンプの完全版と二段ジャンプが完成しましたね。また、仕様書を少しですが進めることができました。仕様書は大切ですよ。これがないと何を作るか、何をどうするかとかをその場で決める手間がなくなりますから。なので仕様書はプロジェクトと同時並行してて、若干先に進んでるぐらいの勢いで書いた方がいいです。
+    <br>話が変わりますが、もともとDay1~Day7までが1つの記事になる予定だったのに3つになってしまいましたね。
+    <br>次回からBlenderが主役の記事になりますので、お楽しみに!
+    <br>それでは、バイバイ！
+
+  </p>
+  
+
+  </section>
+</article>
+
+
+
+
+
+  <aside>
+  <div class="asideBox">
+    <div class="Information">
+      <img class="profile-img" src="../../img/IMG_4746.jpeg" />
+      <p class="category">RockHopperPenguin64</p>
+    </div>
+    <p>
+      Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
+      たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
+      このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+    </p>
+  </div>
+
+  <div class="asideBox">
+    <p class="asideTitle">現在進行中のプロジェクト</p>
+
+    <div class="asideSection" id="project">
+      <p class="asideCategory">進行中のプロジェクト</p>
+      <p id="project-name"></p>
+      <p id="project-description"></p>
+      <p id="project-progress"></p>
+    </div>
+
+    <script src="../JavaScript/data.js"></script>
+    <script>
+      // プロジェクトデータの表示
+      document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+      document.getElementById("project-description").textContent = "説明: " + project.description;
+      document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+    </script>
+  </div>
+</aside>
+
+          
+        </main>
+        <footer>
+            <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+            <p class="Japanese"><a href="../../index.html">ホーム</a>|<a href="../../about.html">ブログの紹介</a>|<a href="../../dev-note.html">デバックノート</a>|<a href="../../memo.html">私の付箋</a></p>
+            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../../img/github.svg"></a></p>
+        </footer>
+    </body>
+</html>
