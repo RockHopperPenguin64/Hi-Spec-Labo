@@ -2,7 +2,7 @@
 <html lang="ja">
     <head>
     <!-- タイトル -->
-    <title>ジャンプせよ！【2段ジャンプ】- Godotのチュートリアル未完走でゲームを作ってみた話 Part2【Godot C#】【ストーリー設計】 | New!! ハイスペラボ</title>
+    <title>【C#】【Godot】敵にGodotくんモデルを使ったらエンジンが崩壊した話 - Godotのチュートリアル未完走でゲームを作ってみた話 #3 【C#】【Godot】【ゲーム開発日誌】【Blender】 | New!!ハイスペラボ</title>
     
     <!-- meta設定 -->
     <meta charset="utf-8">
@@ -10,10 +10,9 @@
     
     <!-- OGP設定 -->
     <meta property="og:title" content="C#でジャンプせよ！|Godotのチュートリアル未完走でゲームを作ってみた話 Part2|New!! ハイスペラボ">
-    <meta property="og:description" content="Godotエンジンのチュートリアルを完走せず、独自にゲーム開発に挑戦した作者の奮闘記。ジャンプや二段ジャンプの挙動改善では、コード順序の大切さや条件分岐の工夫に注目し、初心者目線のトライ＆エラーが満載。ストーリー設計では、プレイヤーの動機と感情移入を軸に、王道にとらわれない世界観づくりに踏み込む。Scratchベースの開発哲学も登場し、初めてのゲーム制作に挑戦する人にも刺さる内容です。技術・ストーリー・工夫の三拍子が揃った第2弾！
-">
-    <meta property="og:image" content="https://example.com/og-image.jpg">
-    <meta property="og:url" content="https://yourblog.com">
+    <meta property="og:description" content="チュートリアル未完走で挑むGodot制作記第3弾！Day7〜51までの激動の期間を凝縮。予言に怯えてバックアップを取ったり、敵キャラに「Godotくん」モデルを使ったらエンジンが崩壊したり……。数々のトラブルを乗り越え、視点を変えることで開発スピードを2倍にした初心者のリアルな奮闘記。">
+    <meta property="og:image" content="eyeTouch.png">
+    <meta property="og:url" content="https://rockhopperpenguin64.github.io/Hi-Spec-Labo/article/mikanGodotChallenge3/">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- フォント -->
@@ -51,4 +50,182 @@
           </a>
         </header>  
   <main>
+      <article>
+          <section>
+              <h1>敵にGodotくんモデルを使ったらエンジンが崩壊した話 - Godotのチュートリアル未完走でゲームを作ってみた話 #3</h1>
+              <img alt="eye-touch" src="eyeTouch.png">
 
+              <p>今回の記事ではDay7 ~ Day51までにあったことをまとめていきます。
+ではいこう！</p>
+
+<p>〜注意事項〜
+この記事は、「条件分岐」や「関数」など、プログラミングの基本的な概念を知っていることを前提に書かれています。<br>
+基礎的な内容にはあまり触れていないため、もしそういった知識がまだない場合は、入門向けの記事を先に読むことをおすすめします。
+（今はちょっと余裕がなくて書けていませんが、今後は初心者向けの記事も投稿する予定です。お楽しみに！）<br>
+また、すでにC#をしっかり理解している方にとっては、退屈な内容に感じられるかもしれません。<br>
+ですが、<strong>初心に戻って基本の意味を改めて確認してみるのも、新しい発見につながるかもしれません。</strong></p>
+
+<h2>~Day7 - Day51まで一気見！~</h2>
+
+<p>一気にまとめていきたいと思います。</p>
+
+<h3>-Day7 ~ Day10 (2025/6/29 ~ 2025/7/2)-</h3>
+
+<p>この期間はとりあえず、<strong>主人公のキャラデザを完成させて、主人公のモデル作り</strong>に取り掛かりました。</p>
+
+<figure>
+    <img alt="当時描いたキャラクターの絵" src="#">
+    <figcaption>長年温めていた主人公のデザイン画</figcaption>
+</figure>
+
+<figure>
+    <img alt="作成途中の写真" src="#">
+    <figcaption>Blenderでのモデリング作業の様子</figcaption>
+</figure>
+
+<h3>-Day11 ~ Day17(2025/7/3 ~ 2025/7/9) -</h3>
+
+<p>この期間は私が考えていた攻撃の1つである。<strong>LightBall</strong>を作り始めた。低速の遠距離攻撃というイメージです。
+ちょうど、当時2025/7/5に大地震が起こるっていう予言があったらので結構そわそわしてたこともあって、停滞している時期もありました。</p>
+
+<p>当時のメモ：
+Day12 今日はコーディングもブレンダーもしなかった。世間だと明日、日本が壊滅する規模の地震が起こるという噂をよく耳にする。これはあくまで「たつき諒氏」の予言であり、100％的中というわけでもない。逆に100％ハズレとも言えない。もしも実際に予言通りに大地震が発生し、PCが地震によって壊れ、復旧したけどファイルが破損してて使えないとかなったら発狂どころの話じゃないので<strong>GithubにBackUPを取っておいた。</strong>ちなみにこのリポジトリは非公開なので見ることはできないということを知っておいてほしい。</p>
+
+<p>当時は予言が当たるとは思っていなかったけどもしも起こったら最悪だったのでこういう感じでした。</p>
+
+<figure>
+    <img alt="LightBall作成途中の写真" src="#">
+    <figcaption>発射される魔法弾「LightBall」のプロトタイプ</figcaption>
+</figure>
+
+<figure>
+    <img alt="コード書いてる時" src="#">
+    <figcaption>VS Codeでのロジック実装画面</figcaption>
+</figure>
+
+<p>Day13は、
+ //-----------------------------&lt;パラメーター&gt;---------------------------------//
+という私が考えた独自のコメントを使って、コードの方の整理をしました。</p>
+
+<figure>
+    <img alt="整理されたコード" src="#">
+    <figcaption>可読性を上げるための独自ルールを導入</figcaption>
+</figure>
+
+<p>あと、DiscordのGodotの日本コミュニティーに入ろうと思ってやってDiscordの登録をしました。ちょうどこの辺りでPart0の記事ができた頃っすね。あと、ファイルパスの修正をしました。</p>
+
+<p>Day14では、LightBallのインスタンス化した後の生成位置の調整をしました。あと、日本のGodotコミュニティーで進捗と質問をしました。</p>
+
+<figure>
+    <img alt="質問したやつ" src="#">
+    <figcaption>コミュニティでの初めての質問</figcaption>
+</figure>
+
+<p>Day15,16,17と発射関数を作りました。この作業中に学んだことがあります。Day17のことでした。その時はプレイヤーの向いている方向にLightBallを飛ばそうとしていたのですが、Playerがこの時もですね、なぜかGetNodeでうまく取得できない問題が起きていたのですが、その時にPlayerから直接Rotation(向いている方向のデータ）を取るのではなく、手間ですが、<strong>Playerの方で変数にして、それを取得するという方針</strong>でやってなんとか動くようになりました。その時に私は<strong>「視点を変えてみる」ことの重要さ</strong>に気づきました。この気づきのおかげで今のコーディングは当時よりも経験があるということもあり、倍ぐらいのスピードで進めれています。</p>
+
+<p>この考え方は皆さんも持つといいのではないでしょうか。（元々気づいていた人からしたらくどいかもしれませんねすいません。）</p>
+
+<h3>-Day18(2025/7/11)-</h3>
+
+<p>この日はカメラの方のコーディングと<strong>落下判定＆リスポーンの機構</strong>を作りました。その時に使ったTimerノードをどうやら当時の私は癖が強いと感じたようです。</p>
+
+<p>当時のメモ（切り抜き）：
+Day18 今日は昨日宣言したカメラの角度の調整のことをすっかり忘れてプレイヤーが落下したら元の場所に戻されるという仕様を作っていた。今回初めて触った<strong>Timerノード</strong>だが、まあまあ癖の強いノードだと感じた。OneShot===>は？、Auto Start===>何をオートスタートするのでしょうか。って感じでチンプンカンプンでしたが、なんとか作り切ることができました。GlobalPositionが-10以下になったら0.8秒待って元の場所に戻るというふうにした。仕組みはこうだ。まずはifでGlobalPositionが-10になっていないかを検知して、それを検知したらタイマーをリセットして1フレーム後にスタート。そしてタイムアウトしたら元の場所に戻すというふうになるように作った。コードを書くのは関数をAIに聞くぐらいですみ、サクッと書くことができた。問題はそのあとだ、このままだと落下して-10以下になった時永遠とタイマーがリセットされ始まることができない。つまり場所を元の場所に戻せないということだ。私はそれを対処するために<strong>_ResetTimerという定数（フラグ）を作り</strong>、それを落下死判定がない時は1、でY-10以下且_ResetTimer==1の時に場所をリセットするというふうにして、そのあと_ResetTimerを0にし、何度もリセットが起こらないようにした。また、今まで放置していた、ボールを出したあと永久に進み続けて読み込まれ続けてどんどん重くなるという問題を対処するために、プレイヤーと同じようにY-10以下になったらメモリからの解放をさせるようにした。</p>
+
+<p>つまり、この日は落下判定とリスポーン機構を作りました。初めて触った「Timerノード」は、当時の私にはかなり癖が強く感じられました。</p>
+
+<ul>
+    <li>OneShot？（1回だけ？）</li>
+    <li>Auto Start？（勝手に始まるの？）</li>
+</ul>
+
+<p>混乱しながらも、「Y座標が-10以下になったら0.8秒待ってリスポーン」という仕組みを構築。if文で何度もタイマーがリセットされないよう、<strong>_ResetTimer というフラグ管理用の変数を使って制御しました。</strong>今思えば基本的なフラグ管理ですが、自力で解決策にたどり着いたのは大きな一歩でした。</p>
+
+<h3>-Day19 ~ Day24 (2025/7/12 ~ 2025/7/17) -</h3>
+
+<p>この期間は主にカメラの作成をしていました。カメラを作るにあたって当時見つけた<strong>桜井政博のゲームを作るにはのカメラの回</strong>を見て設計していました。エラーが出たりしましたが、ほとんどファイルパスのミスでした。</p>
+
+<h3>-Day25 ~ Day30(2025/7/18 ~ 2025/7/25) -</h3>
+
+<p>この期間は<strong>PowerStarというチャージ攻撃</strong>を作りました。長押しで星を貯めて、溜まった量だけある星が前方に飛んでいくという攻撃です。まあ、どの攻撃も見栄えは良くなかったですけどね。</p>
+
+<h3>-Day31(2025/7/26) -</h3>
+
+<p>この日は私のゲーム制作史上最もやばいことが起きました。敵を作って攻撃を当ててみようということをしていたのですが、その敵キャラのモデルに<strong>Godotのロゴのあの人のモデルを敵のモデルにしてビルドしたらGodotEngineが急に落ちて、依存関係がめちゃくちゃになった</strong>んですね。でその日はもう制作辞めて別のことをしていました。</p>
+
+<h3>-Day32 ~ Day47(2025/7/27 ~ 2025/8/12)-</h3>
+
+<p>この2週間でですね。Day31のやつを復旧するがてらバージョンをあげてみるかと試してみてコードの書き方とか仕様が変わっていて今のコードが使えないというふうになって<strong>バージョンアップを断念</strong>したり、ファイルのフォルダ構成やノードツリーを整えてみたりしてました。まあ、依存関係が壊れてただけでコードは無事だったのですけど。バージョンを上げたり下げたりしてて結構時間食いました。</p>
+
+<h3>-Day48 ~ Day51-</h3>
+
+<p>序盤で作った、プレイヤーのモデルの調整をして、ボーンを入れてアニメーションを入れようとしていたのですが、ボーンを入れる段階で終了しました。</p>
+
+<h2>~締め~</h2>
+
+<p>今回の記事では、Day7からDay51までの制作期間を一気に振り返りました。振り返ってみると、順調に進んでいた日よりも、<strong>止まったり、悩んだり、トラブルに巻き込まれたりしていた日の方が圧倒的に多かった</strong>気がします。ですが、その一つ一つが無駄だったかというと、今となってはそうは思いません。視点を変えることで解決できた問題や、環境トラブルを通して学んだ<strong>バックアップの大切さ、設計を見直す重要性</strong>など、この期間があったからこそ今の制作スピードや考え方があります。派手な進捗は少ないですが、基礎体力を作っていた期間だったと言えるかもしれません。次は、この積み重ねをどう形にしていくのかを書いていこうと思います。</p>
+
+          
+  </section>
+    <nav class="np-nav">
+  <!-- PREV -->
+  <a href="https://rockhopperpenguin64.github.io/Hi-Spec-Labo/article/programing1Year/" class="np-card np-prev">
+    <span class="np-label">PREV</span>
+    <span class="np-title">プログラミングを始めて1年が経ちました</span>
+  </a>
+
+  <!-- NEXT -->
+  <a href="#">
+    <span class="np-label">NEXT</span>
+    <span class="np-title">Null</span>
+  </a>
+</nav>
+
+</article>
+
+
+
+
+
+  <aside>
+  <div class="asideBox">
+    <div class="Information">
+      <img class="profile-img" src="../../img/IMG_4746.jpeg" />
+      <p class="category">RockHopperPenguin64</p>
+    </div>
+    <p>
+      Web制作脱初心者の自分が、手を動かしながら試行錯誤した記録やアイデアを記録していきます。
+      たとえ完璧でなくても、やる。その一歩を重ねることで自分のみている世界が変わると思ったのです。
+      このブログのおかげで、誰かが「やってみようかな」と思うきっかけになれたら嬉しいです。
+    </p>
+  </div>
+
+  <div class="asideBox">
+    <p class="asideTitle">現在進行中のプロジェクト</p>
+
+    <div class="asideSection" id="project">
+      <p class="asideCategory">進行中のプロジェクト</p>
+      <p id="project-name"></p>
+      <p id="project-description"></p>
+      <p id="project-progress"></p>
+    </div>
+
+    <script src="../JavaScript/data.js"></script>
+    <script>
+      // プロジェクトデータの表示
+      document.getElementById("project-name").textContent = "プロジェクト名: " + project.name;
+      document.getElementById("project-description").textContent = "説明: " + project.description;
+      document.getElementById("project-progress").textContent = "進捗: " + project.progress;
+    </script>
+  </div>
+</aside>
+
+          
+        </main>
+        <footer>
+            <p class="Japanese">&copy; 2025 New!!ハイスペラボ</p>
+            <p class="Japanese"><a href="../../index.html">ホーム</a>|<a href="../../about.html">ブログの紹介</a>|<a href="../../dev-note.html">デバックノート</a>|<a href="../../memo.html">私の付箋</a></p>
+            <p><a href="https://github.com/RockHopperPenguin64"><img class="github" src="../../img/github.svg"></a></p>
+        </footer>
+    </body>
+</html>
