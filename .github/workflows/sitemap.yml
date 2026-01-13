@@ -1,30 +1,51 @@
-name: Generate Sitemap
+name: Generate sitemap.xml
 
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: write
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  sitemap:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Generate sitemap.xml
+        run: |
+          SITE_URL="https://rockhopperpenguin64.github.io/Hi-Spec-Labo/index.html"
 
-      - run: npm install
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
-      - run: node scripts/generateSitemap.js
+          find . -name "*.html" \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            | sed 's|^\./||' \
+            | while read file; do
+                if [ "$file" = "index.html" ]; then
+                  url="$SITE_URL/"
+                else
+                  url="$SITE_URL/${file%.html}/"
+                fi
 
-      - run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+                echo "  <url>" >> sitemap.xml
+                echo "    <loc>$url</loc>" >> sitemap.xml
+                echo "    <changefreq>weekly</changefreq>" >> sitemap.xml
+                echo "    <priority>0.8</priority>" >> sitemap.xml
+                echo "  </url>" >> sitemap.xml
+            done
+
+          echo '</urlset>' >> sitemap.xml
+
+      - name: Commit & Push sitemap.xml
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
           git add sitemap.xml
-          git diff --cached --quiet || git commit -m '🔄 Auto update sitemap.xml'
+          git commit -m "chore: auto-generate sitemap.xml" || exit 0
           git push
